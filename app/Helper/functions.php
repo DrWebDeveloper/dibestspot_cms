@@ -1,7 +1,7 @@
 <?php
 /** This file is being used to write custom PHP functions for this application **/
 
-// write two functions to encrypt and decrypt the data that could be sent to the other PHP server and decrypt the data that is received from the other PHP server.
+// testing udpates
 
 // Function to encrypt the data
 function encryptData($data) {
