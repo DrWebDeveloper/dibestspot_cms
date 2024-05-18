@@ -7,6 +7,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route to test the encryptData function
+Route::prefix('test')->group(function () {
+    Route::get('/encrypt', function () {
+        $data = 'Umar';
+        $encryptedData = encryptData($data);
+        return $encryptedData;
+    });
+
+    Route::get('/decrypt', function () {
+        $data = 'w+eVb15WgCzVgKB0MnRdtVI5K0FqTE0zMWpFdWFlbi9mc2dWSVE9PQ==';
+        $decryptedData = decryptData($data);
+        return $decryptedData;
+    });
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
