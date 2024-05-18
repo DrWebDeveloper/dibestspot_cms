@@ -5,7 +5,7 @@
 
 // Function to encrypt the data
 function encryptData($data) {
-    $key = "This is a secret key";
+    $key = env('SERVER_ENCRYPTION_KEY','ZDb2MEELzCcWJnFbM4lyvBVIkA0zcUJJvtvntVqANYY');
     $key = substr(hash('sha256', $key, true), 0, 16); // Ensure the key is exactly 16 bytes
     $iv = openssl_random_pseudo_bytes(16); // Generate a random 16-byte IV
     $encryptedData = openssl_encrypt($data, 'AES-128-CBC', $key, 0, $iv);
@@ -14,7 +14,7 @@ function encryptData($data) {
 
 // Function to decrypt the data
 function decryptData($data) {
-    $key = "This is a secret key";
+    $key = env('SERVER_ENCRYPTION_KEY','ZDb2MEELzCcWJnFbM4lyvBVIkA0zcUJJvtvntVqANYY');
     $key = substr(hash('sha256', $key, true), 0, 16); // Ensure the key is exactly 16 bytes
     $data = base64_decode($data); // Decode the base64 encoded data
     $iv = substr($data, 0, 16); // Extract the 16-byte IV
