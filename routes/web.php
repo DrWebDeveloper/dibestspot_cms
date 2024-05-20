@@ -16,7 +16,7 @@ Route::prefix('test')->group(function () {
     });
 
     Route::get('/decrypt', function () {
-        $data = 'w+eVb15WgCzVgKB0MnRdtVI5K0FqTE0zMWpFdWFlbi9mc2dWSVE9PQ==';
+        $data = 'TRr8s4wjhNc0rUfkzxwxHzRpb1Brd1NwbUM0ZUtKNTdsWlFHeFE9PQ==';
         $decryptedData = decryptData($data);
         return $decryptedData;
     });
