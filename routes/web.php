@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\v1\Admin\AdminContoller;
 use App\Http\Controllers\v1\User\UserController;
+use App\Http\Controllers\PlatformController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,11 +39,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('platform', PlatformController::class);
+    Route::post('/platform/store', [PlatformController::class, 'store'])->name('platform.store');
+
 });
+
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/dashboard', [AdminContoller::class, 'dashboard'])->name('dashboard');
+
 });
+
 
 require __DIR__ . '/auth.php';
