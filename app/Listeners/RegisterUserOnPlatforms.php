@@ -26,19 +26,24 @@ class RegisterUserOnPlatforms
     {
         $user = $event->user;
 
-        // Get the platform IDs where the user has to be registered
-        $platformsToRegister = Platform::active()->autoRegistertionEnabled()
-            ->whereNotIn('id', $user->platforms()->pluck('id')->toArray())
-            ->get();
+        try {
+            // Get the platform IDs where the user has to be registered
+            $platformsToRegister = Platform::active()->autoRegistertionEnabled()
+                ->whereNotIn('id', $user->platforms()->pluck('id')->toArray())
+                ->get();
 
-        // Dispatch a job for each platform
-        if($platformsToRegister->isNotEmpty()) {
-            $platformsToRegister->each(function ($platform) use ($user) {
-                PlatformRegistration::dispatch($user, $platform);
-            });
-        }else{
-            // Log that the user is already registered on all platforms
-            Log::info("User {$user->id} is already registered on all platforms or there are no active platforms for auto registration.");
+            // Dispatch a job for each platform
+            if ($platformsToRegister->isNotEmpty()) {
+                $platformsToRegister->each(function ($platform) use ($user) {
+                    PlatformRegistration::dispatch($user, $platform);
+                });
+            } else {
+                // Log that the user is already registered on all platforms
+                Log::info("User {$user->id} is already registered on all platforms or there are no active platforms for auto registration.");
+            }
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error("Failed to register user {$user->id} on platforms. Error: {$e->getMessage()}");
         }
     }
 }
