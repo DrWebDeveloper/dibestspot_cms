@@ -37,19 +37,7 @@
                             <x-input-error class="mt-2" :messages="$errors->get('slug')" />
                         </div> --}}
 
-                        <div>
-                            <x-input-label for="logo" :value="__('Logo: ')" />
-                            <x-text-input id="logo" name="logo" type="text" class="mt-1 block w-full"
-                                :value="old('logo')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('logo')" />
-                        </div>
 
-                        <div>
-                            <x-input-label for="photo" :value="__('Photo: ')" />
-                            <x-text-input id="photo" name="photo" type="text" class="mt-1 block w-full"
-                                :value="old('photo')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('photo')" />
-                        </div>
 
 
                         <div>
@@ -254,6 +242,18 @@
                         </div>
                     </div>
 
+                    <div class="flex">
+                        <x-input-label for="logo" :value="__('Logo: ')" />
+                        <input id="logo" name="logo" type="file" class="mt-1 block w-full"
+                            :value="old('logo')" />
+                        <x-input-error class="mt-2" :messages="$errors->get('logo')" />
+
+                        <x-input-label for="photo" :value="__('Photo: ')" />
+                        <input id="photo" name="photo" type="file" class="mt-1 block w-full"
+                            :value="old('photo')" />
+                        <x-input-error class="mt-2" :messages="$errors->get('photo')" />
+                    </div>
+<br>
                     <div class="mb-3 px-6 flex justify-between">
                         <a href="{{ route('admin.platform.index') }}"><x-secondary-button
                                 :>{{ __('Go Back') }}</x-secondary-button></a>

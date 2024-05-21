@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\v1\Admin\AdminContoller;
 use App\Http\Controllers\v1\User\UserController;
-use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\v1\Admin\PlatformController;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;

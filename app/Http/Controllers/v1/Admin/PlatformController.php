@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\v1\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Platform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 
 class PlatformController extends Controller
@@ -17,7 +15,6 @@ class PlatformController extends Controller
     {
         return view('admin.platform.create');
     }
-
     public function index()
     {
         $platforms = Platform::all();
@@ -28,6 +25,7 @@ class PlatformController extends Controller
     {
         $request->merge([
             'slug' => Str::slug($request->name),
+
         ]);
 
         return $request->all();
