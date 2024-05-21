@@ -32,6 +32,33 @@ class PlatformRegistration implements ShouldQueue
     public function handle(): void
     {
         // Register user on platform
-        Log::info("Registering user {$this->user->id} on platform {$this->platform->id}");
+        try {
+            //code...
+            $userPlatform = $this->user->platforms()->create([
+                'platform_id' => $this->platform->id,
+                'platform_user_id' => ($this->platform->id + $this->user->id) * 2,
+                'platform_user_username' => $this->user->username ?? $this->user->email,
+                'platform_user_email' => $this->user->email,
+                'platform_user_phone_number' => $this->user->phone_number,
+                'platform_user_status' => 'active',
+                'platform_user_last_login' => now(),
+                'platform_user_role' => 'user',
+                'status' => 'active'
+            ]);
+
+            if ($userPlatform) {
+                Log::info("User {$this->user->id} registered on platform {$this->platform->name} ({$this->platform->id}).");
+            } else {
+                Log::error("Error registering user {$this->user->id} on platform {$this->platform->name} ({$this->platform->id}).");
+                throw new \Exception("Error registering user {$this->user->id} on platform {$this->platform->name} ({$this->platform->id}).");
+            }
+        } catch (\Throwable $th) {
+            // Log the exception
+            Log::error('Error registering user on platform ' . $this->platform->name, [
+                'user_id' => $this->user->id,
+                'platform_id' => $this->platform->id,
+                'error' => $th->getMessage(),
+            ]);
+        }
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->string('url')->nullable();
+            $table->string('auto_login_url')->nullable();
             $table->string('domain')->nullable();
             $table->string('homepage')->nullable();
             $table->text('db')->nullable();
@@ -33,7 +34,7 @@ return new class extends Migration
             $table->text('secret_key')->nullable();
             $table->enum('auto_login', ['enabled', 'disabled', 'blocked'])->default('enabled');
             $table->enum('auto_register', ['enabled', 'disabled', 'blocked'])->default('enabled');
-            $table->json('metadata')->nullable();
+            $table->text('metadata')->nullable();
             $table->text('settings')->nullable();
             $table->string('api_url')->nullable();
             $table->text('api_keys')->nullable();

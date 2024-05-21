@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('platform_user_id');
             $table->string('platform_user_username')->nullable();
             $table->string('platform_user_email')->nullable();
-            $table->string('platform_user_phone')->nullable();
+            $table->enum('platform_user_status', ['active', 'inactive', 'banned', 'deleted', 'suspended', 'pending', 'verified', 'unverified', 'blocked'])->default('pending');
+            $table->string('platform_user_phone_number')->nullable();
             $table->timestamp('platform_user_last_login')->nullable();
             $table->string('platform_user_role')->nullable();
             $table->string('platform_user_token')->nullable();

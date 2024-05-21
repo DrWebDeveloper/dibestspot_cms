@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
-class RegisterUserOnPlatforms
+class RegisterUserOnPlatforms implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -25,7 +25,7 @@ class RegisterUserOnPlatforms
     public function handle(UserRegistered $event): void
     {
         $user = $event->user;
-
+        Log::info("User {$user->id} registered. Registering user on platforms...");
         try {
             // Get the platform IDs where the user has to be registered
             $platformsToRegister = Platform::active()->autoRegistertionEnabled()
@@ -43,7 +43,10 @@ class RegisterUserOnPlatforms
             }
         } catch (\Exception $e) {
             // Log the exception
-            Log::error("Failed to register user {$user->id} on platforms. Error: {$e->getMessage()}");
+            Log::error('Error registering user on platforms', [
+                'user_id' => $user->id,
+                'error' => $e->getMessage(),
+            ]);
         }
     }
 }
