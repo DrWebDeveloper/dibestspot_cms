@@ -12,138 +12,143 @@
 
             <div>
                 <x-input-label for="name" :value="__('Name:')" />
-                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus />
+                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autofocus />
                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
 
             <div>
                 <x-input-label for="slug" :value="__('Slug:')" />
-                <x-text-input id="slug" name="slug" type="text" class="mt-1 block w-full" :value="old('slug', $user->slug)" required autofocus />
+                <x-text-input id="slug" name="slug" type="text" class="mt-1 block w-full" :value="old('slug')" required />
                 <x-input-error class="mt-2" :messages="$errors->get('slug')" />
             </div>
 
             <div>
                 <x-input-label for="logo" :value="__('Logo: ')" />
-                <x-text-input id="logo" name="logo" type="text" class="mt-1 block w-full" :value="old('logo', $user->logo)" required autofocus />
+                <x-text-input id="logo" name="logo" type="text" class="mt-1 block w-full" :value="old('logo')"  />
                 <x-input-error class="mt-2" :messages="$errors->get('logo')" />
             </div>
 
             <div>
                 <x-input-label for="photo" :value="__('Photo: ')" />
-                <x-text-input id="photo" name="photo" type="text" class="mt-1 block w-full" :value="old('photo', $user->photo)" required autofocus />
+                <x-text-input id="photo" name="photo" type="text" class="mt-1 block w-full" :value="old('photo')"  />
                 <x-input-error class="mt-2" :messages="$errors->get('photo')" />
             </div>
 
 
             <div>
                 <x-input-label for="url" :value="__('Url: ')" />
-                <x-text-input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url', $user->url)" required autofocus />
+                <x-text-input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url')" />
                 <x-input-error class="mt-2" :messages="$errors->get('url')" />
             </div>
 
             <div>
                 <x-input-label for="domain" :value="__('Domain: ')" />
-                <x-text-input id="domain" name="domain" type="text" class="mt-1 block w-full" :value="old('domain', $user->domain)" required autofocus />
+                <x-text-input id="domain" name="domain" type="text" class="mt-1 block w-full" :value="old('domain')"  />
                 <x-input-error class="mt-2" :messages="$errors->get('domain')" />
             </div>
 
 
             <div>
-                <x-input-label for="homepage_url" :value="__('HomePage URL')" />
-                <x-text-input id="homepage_url" name="homepage_url" type="text" class="mt-1 block w-full" :value="old('homepage_url', $user->homepage_url)" required autofocus />
-                <x-input-error class="mt-2" :messages="$errors->get('homepage_url')" />
+                <x-input-label for="page_url" :value="__('HomePage URL')" />
+                <x-text-input id="page_url" name="page_url" type="text" class="mt-1 block w-full" :value="old('page_url')"  />
+                <x-input-error class="mt-2" :messages="$errors->get('page_url')" />
             </div>
 
 
             <div>
                 <x-input-label for="smtp" :value="__('SMTP: ')" />
-                <x-text-input id="smtp" name="smtp" type="text" class="mt-1 block w-full" :value="old('smtp', $user->smtp)" required autofocus />
+                <x-text-input id="smtp" name="smtp" type="text" class="mt-1 block w-full" :value="old('smtp')"  />
                 <x-input-error class="mt-2" :messages="$errors->get('smtp')" />
             </div>
 
 
             <div>
                 <x-input-label for="support_email" :value="__('Email: ')" />
-                <x-text-input id="support_email" name="support_email" type="text" class="mt-1 block w-full" :value="old('support_email', $user->support_email)" required autofocus />
+                <x-text-input id="support_email" name="support_email" type="text" class="mt-1 block w-full" :value="old('support_email')"  />
                 <x-input-error class="mt-2" :messages="$errors->get('support_email')" />
             </div>
 
 
             <div>
                 <x-input-label for="description" :value="__('Description: ')" />
-                <x-text-input id="description" name="description" type="text" class="mt-1 block w-full" :value="old('description', $user->description)" required autofocus />
+                <x-text-input id="description" name="description" type="text" class="mt-1 block w-full" :value="old('description')"  />
                 <x-input-error class="mt-2" :messages="$errors->get('description')" />
             </div>
 
 
-
-                <input type="checkbox" class="form-check-input" id="auto_login" name="auto_login">
-
-
-                <div class="mb-3">
-                <label for="auto_register" class="form-label">Auto Register</label>
-                <input type="checkbox" class="form-check-input" id="auto_register" name="auto_register">
+            <div>
+                <x-input-label for="auto_login" :value="__('Auto Login: ')" />
+                <x-text-input  type="checkbox" id="auto_login" name="auto_login" type="text" class="mt-1 block w-full" :value="old('auto_login')"  />
+                <x-input-error class="mt-2" :messages="$errors->get('auto_login')" />
             </div>
 
-            <div class="mb-3">
-                <label for="admin_email" class="form-label">Admin Email</label>
-                <input type="email" class="form-control" id="admin_email" name="admin_email"
-                    placeholder="Enter admin email">
+
+            <div>
+                <x-input-label for="auto_register" :value="__('Auto Register: ')" />
+                <x-text-input  type="checkbox" id="auto_register" name="auto_register" type="text" class="mt-1 block w-full" :value="old('auto_register')"  />
+                <x-input-error class="mt-2" :messages="$errors->get('auto_register')" />
             </div>
 
-            <div class="mb-3">
-                <label for="admin_url" class="form-label">Admin URL</label>
-                <input type="text" class="form-control" id="admin_url" name="admin_url"
-                    placeholder="Enter admin URL">
-            </div>
+            <div>
+            <x-input-label for="admin_email" :value="__('Admin Email: ')" />
+            <x-text-input id="admin_email" name="admin_email" type="text" class="mt-1 block w-full" :value="old('admin_email', $user->admin_email)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('admin_email')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="metadata" class="form-label">Metadata</label>
-                <textarea class="form-control" id="metadata" name="metadata" rows="3"></textarea>
-            </div>
+        <div>
+            <x-input-label for="admin_url" :value="__('Admin URL: ')" />
+            <x-text-input id="admin_url" name="admin_url" type="text" class="mt-1 block w-full" :value="old('admin_url', $user->admin_url)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('admin_url')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="settings" class="form-label">Settings</label>
-                <textarea class="form-control" id="settings" name="settings" rows="3"></textarea>
-            </div>
+        <div>
+            <x-input-label for="metadata" :value="__('MetaData: ')" />
+            <x-text-input id="metadata" name="metadata" type="text" class="mt-1 block w-full" :value="old('metadata', $user->metadata)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('metadata')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="api_keys" class="form-label">API Keys</label>
-                <textarea class="form-control" id="api_keys" name="api_keys" rows="3"></textarea>
-            </div>
+        <div>
+            <x-input-label for="setting" :value="__('Setting: ')" />
+            <x-text-input id="setting" name="setting" type="text" class="mt-1 block w-full" :value="old('setting', $user->setting)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('setting')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="api_url" class="form-label">API URL</label>
-                <input type="text" class="form-control" id="api_url" name="api_url"
-                    placeholder="Enter API URL">
-            </div>
+        <div>
+            <x-input-label for="api_keys" :value="__('Api Key: ')" />
+            <x-text-input id="api_keys" name="api_keys" type="text" class="mt-1 block w-full" :value="old('api_keys', $user->api_keys)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('api_keys')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="webhook_url" class="form-label">Webhook URL</label>
-                <input type="text" class="form-control" id="webhook_url" name="webhook_url"
-                    placeholder="Enter webhook URL">
-            </div>
+        <div>
+            <x-input-label for="api_url" :value="__('Api URL ')" />
+            <x-text-input id="api_url" name="api_url" type="text" class="mt-1 block w-full" :value="old('api_url', $user->api_url)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('api_url')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="callback_url" class="form-label">Callback URL</label>
-                <input type="text" class="form-control" id="callback_url" name="callback_url"
-                    placeholder="Enter callback URL">
-            </div>
+        <div>
+            <x-input-label for="webhook_url" :value="__('WebHook URL: ')" />
+            <x-text-input id="webhook_url" name="webhook_url" type="text" class="mt-1 block w-full" :value="old('webhook_url', $user->webhook_url)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('webhook_url')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="redirect_url" class="form-label">Redirect URL</label>
-                <input type="text" class="form-control" id="redirect_url" name="redirect_url"
-                    placeholder="Enter redirect URL">
-            </div>
+        <div>
+            <x-input-label for="callback_url" :value="__('Callback URL')" />
+            <x-text-input id="callback_url" name="callback_url" type="text" class="mt-1 block w-full" :value="old('callback_url', $user->callback_url)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('callback_url')" />
+        </div>
 
-            <div class="mb-3">
-                <label for="environment" class="form-label">Environment</label>
-                <select class="form-select" id="environment" name="environment">
-                    <option selected>Development</option>
-                    <option>Production</option>
-                </select>
-            </div>
+        <div>
+            <x-input-label for="redirect_url" :value="__('Redirect URL: ')" />
+            <x-text-input id="redirect_url" name="redirect_url" type="text" class="mt-1 block w-full" :value="old('redirect_url', $user->redirect_url)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('redirect_url')" />
+        </div>
+
+        <div>
+            <x-input-label for="enviornment" :value="__('Enviornment: ')" />
+            <x-text-input id="enviornment" name="enviornment" type="text" class="mt-1 block w-full" :value="old('enviornment', $user->enviornment)"  autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('enviornment')" />
+        </div>
 
             <div class="mb-3">
                 <label for="type" class="form-label">Type</label>
