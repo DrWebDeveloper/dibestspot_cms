@@ -143,6 +143,22 @@
                         </div>
 
                         <div>
+                            <x-input-label for="public_key" :value="__('Public key: ')" />
+                            <x-text-input id="public_key" name="public_key" type="text" class="mt-1 block w-full"
+                                :value="old('public_key')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('smtp')" />
+                        </div>
+
+
+                        <div>
+                            <x-input-label for="secret_key" :value="__('Secret key: ')" />
+                            <x-text-input id="secret_key" name="secret_key" type="text" class="mt-1 block w-full"
+                                :value="old('secret_key')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('secret_key')" />
+                        </div>
+
+
+                        <div>
                             <x-input-label for="api_url" :value="__('Api URL ')" />
                             <x-text-input id="api_url" name="api_url" type="text" class="mt-1 block w-full"
                                 :value="old('api_url')" />
@@ -187,8 +203,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            <select class="form-select" id="category" name="category">
+                            <x-input-label for="category" :value="__('Category: ')" />
+                            <select id="category" name="category"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option selected>General</option>
                                 <option>Ecommerce</option>
                                 <option>Blog</option>
@@ -196,17 +213,16 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="country" class="form-label">Country</label>
-                            <select class="form-select" id="country" name="country">
-                                <option selected>United States</option>
-                                <option>Canada</option>
-                                <!-- Add more countries as needed -->
-                            </select>
+                            <x-input-label for="country" :value="__('Country')" />
+                                @include('components.countries')
+                            <x-input-error :messages="$errors->get('country')" class="mt-2" />
                         </div>
 
+
                         <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" id="status" name="status">
+                            <x-input-label for="status" :value="__('Status: ')" />
+                            <select id="status" name="status"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option selected>Active</option>
                                 <option>Inactive</option>
                             </select>
