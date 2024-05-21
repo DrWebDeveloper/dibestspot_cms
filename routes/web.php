@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\v1\Admin\AdminContoller;
 use App\Http\Controllers\v1\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::prefix('test')->group(function () {
     });
 });
 
+// Routes for Users
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
@@ -35,6 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('/dashboard', [AdminContoller::class, 'dashboard'])->name('dashboard');
 });
 
 require __DIR__ . '/auth.php';

@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('status', ['active', 'inactive', 'suspended', 'banned', 'deleted', 'unverified'])->default('active');
+            $table->string('avatar')->nullable();
+            $table->string('api_token',230)->unique()->nullable()->default(null);
+            $table->string('role')->default('user');
+            $table->enum('status', ['active', 'inactive','propagating', 'suspended', 'banned', 'deleted', 'unverified'])->default('propagating');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

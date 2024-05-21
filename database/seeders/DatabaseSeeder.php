@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             PlatformSeeder::class,
+            AdminUserSeeder::class,
             // Other seeders can be added here
         ]);
 
