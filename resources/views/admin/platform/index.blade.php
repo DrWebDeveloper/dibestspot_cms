@@ -21,7 +21,7 @@
                             <div class="flex items-center justify-between border-b border-gray-200 bg-white p-6">
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-800">{{ $platform->name }}</h2>
-                                    <p class="text-gray-600">{{ Str::limit($platform->description, 60) }}</p>
+                                    <p class="text-gray-600">{{ Str::limit($platform->description, 100) }}</p>
                                 </div>
                                 <div class="flex items-center">
                                     <a href="#" class="text-blue-500">

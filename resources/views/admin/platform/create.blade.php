@@ -14,7 +14,8 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div>
-                    <form class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2" action="{{ route('platform.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2"
+                        action="{{ route('platform.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <x-input-label for="name" :value="__('Name:')" />
@@ -237,7 +238,11 @@
                             </select>
                         </div>
 
-
+                        <div class="mb-3">
+                            <x-input-label for="country" :value="__('Country')" />
+                                @include('components.countries')
+                            <x-input-error :messages="$errors->get('country')" class="mt-2" />
+                        </div>
 
 
                         <div class="mb-3">
@@ -254,7 +259,8 @@
                         </div>
 
                         <div class="mb-3 flex justify-between">
-                            <x-secondary-button>{{ __('Go Back') }}</x-secondary-button>
+                            <a href="{{ route('admin.platform.index') }}"><x-secondary-button
+                                    :>{{ __('Go Back') }}</x-secondary-button></a>
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
                         </div>
 
