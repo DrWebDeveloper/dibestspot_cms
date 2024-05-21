@@ -212,7 +212,11 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create Platform</button>
+                        <div class="mb-3 flex justify-between">
+                            <x-secondary-button>{{ __('Go Back') }}</x-secondary-button>
+                            <x-primary-button>{{ __('Save') }}</x-primary-button>
+                        </div>
+
                     </form>
                 </div>
             </div>
