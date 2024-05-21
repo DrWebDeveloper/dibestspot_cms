@@ -238,11 +238,6 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <x-input-label for="country" :value="__('Country')" />
-                                @include('components.countries')
-                            <x-input-error :messages="$errors->get('country')" class="mt-2" />
-                        </div>
 
 
                         <div class="mb-3">
