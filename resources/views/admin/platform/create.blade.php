@@ -97,18 +97,11 @@
                             <x-input-error class="mt-2" :messages="$errors->get('support_email')" />
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <x-input-label for="country" :value="__('Country')" />
                                 @include('components.countries')
                             <x-input-error :messages="$errors->get('country')" class="mt-2" />
-                        </div>
-
-                        <div>
-                            <x-input-label for="description" :value="__('Description: ')" />
-                            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"
-                                :value="old('description')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('description')" />
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <x-input-label for="auto_register" :value="__('Auto Register: ')" />
@@ -132,13 +125,6 @@
                             </select>
                         </div>
 
-
-                        <div>
-                            <x-input-label for="admin_email" :value="__('Admin Email: ')" />
-                            <x-text-input id="admin_email" name="admin_email" type="text" class="mt-1 block w-full"
-                                :value="old('admin_email')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('admin_email')" />
-                        </div>
 
                         <div>
                             <x-input-label for="admin_url" :value="__('Admin URL: ')" />
