@@ -13,7 +13,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <form action="{{ route('platform.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.platform.store') }}" method="POST" enctype="multipart/form-data">
                     <div class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                         @csrf
                         <div>
@@ -37,9 +37,6 @@
                             <x-input-error class="mt-2" :messages="$errors->get('slug')" />
                         </div> --}}
 
-
-
-
                         <div>
                             <x-input-label for="url" :value="__('URL: ')" />
                             <x-text-input id="url" name="url" type="text" class="mt-1 block w-full"
@@ -53,7 +50,6 @@
                                 :value="old('domain')" />
                             <x-input-error class="mt-2" :messages="$errors->get('domain')" />
                         </div>
-
 
                         <div>
                             <x-input-label for="homepage" :value="__('HomePage URL')" />
@@ -95,9 +91,9 @@
                             <x-input-label for="auto_register" :value="__('Auto Register: ')" />
                             <select id="auto_register" name="auto_register"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option>Enabled</option>
-                                <option>Disabled</option>
-                                <option>Blocked</option>
+                                <option value="enabled">Enabled</option>
+                                <option value="disabled">Disabled</option>
+                                <option value="blocked">Blocked</option>
 
                             </select>
                         </div>
@@ -106,9 +102,9 @@
                             <x-input-label for="auto_login" :value="__('Auto Login: ')" />
                             <select id="auto_login" name="auto_login"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option>Enabled</option>
-                                <option>Disabled</option>
-                                <option>Blocked</option>
+                                <option value="enabled">Enabled</option>
+                                <option value="disabled">Disabled</option>
+                                <option value="blocked">Blocked</option>
 
                             </select>
                         </div>
@@ -119,6 +115,13 @@
                             <x-text-input id="admin_url" name="admin_url" type="text" class="mt-1 block w-full"
                                 :value="old('admin_url')" />
                             <x-input-error class="mt-2" :messages="$errors->get('admin_url')" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="auto_login_url" :value="__('Auto Login URL: ')" />
+                            <x-text-input id="auto_login_url" name="auto_login_url" type="text" class="mt-1 block w-full"
+                                :value="old('auto_login_url')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('auto_login_url')" />
                         </div>
 
                         {{-- <div>
@@ -190,9 +193,9 @@
                             <x-input-label for="environment" :value="__('Environment: ')" />
                             <select id="environment" name="environment"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option selected>Development</option>
-                                <option>Stagging</option>
-                                <option>Production</option>
+                                <option value="development" selected>Development</option>
+                                <option value="staging">Staging</option>
+                                <option value="production">Production</option>
                             </select>
                         </div>
 
@@ -200,12 +203,12 @@
                             <x-input-label for="type" :value="__('Type: ')" />
                             <select id="type" name="type"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option selected>Payment</option>
-                                <option>Crowdfunding</option>
-                                <option>E-commerce</option>
-                                <option>Social</option>
-                                <option>Other</option>
-
+                                <option value="payment" selected>Payment</option>
+                                <option value="marketplace" selected>Marketplace</option>
+                                <option value="crowdfunding">Crowdfunding</option>
+                                <option value="e-commerce">E-commerce</option>
+                                <option value="social">Social</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
 
@@ -214,30 +217,24 @@
                             <select id="category" name="category"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option selected>Finance</option>
-                                <option>Entertainment</option>
-                                <option>Education</option>
-                                <option>Health</option>
-                                <option>News</option>
-                                <option>Social</option>
-                                <option>Other</option>
-
-
+                                <option value="entertainment">Entertainment</option>
+                                <option value="education">Education</option>
+                                <option value="health">Health</option>
+                                <option value="news">News</option>
+                                <option value="social">Social</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
-
-
-
 
                         <div class="mb-3">
                             <x-input-label for="status" :value="__('Status: ')" />
                             <select id="status" name="status"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option selected>Active</option>
-                                <option>Inactive</option>
-                                <option>Suspended</option>
-                                <option>Pending</option>
-                                <option>Maintenance</option>
-
+                                <option value="active" selected>Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="suspended">Suspended</option>
+                                <option value="pending">Pending</option>
+                                <option value="maintenance">Maintenance</option>
                             </select>
                         </div>
                     </div>
@@ -253,7 +250,7 @@
                             :value="old('photo')" />
                         <x-input-error class="mt-2" :messages="$errors->get('photo')" />
                     </div>
-<br>
+                    <br>
                     <div class="mb-3 px-6 flex justify-between">
                         <a href="{{ route('admin.platform.index') }}"><x-secondary-button
                                 :>{{ __('Go Back') }}</x-secondary-button></a>
