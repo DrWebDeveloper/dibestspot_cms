@@ -15,8 +15,8 @@ class PlatformController extends Controller
 }
 
 public function index(){
-    $platform = Platform::all();
-    return view('platform.index', compact('platform'));
+    $platforms = Platform::all();
+    return view('platform.index', compact('platforms'));
 }
 
     public function store(Request $request)

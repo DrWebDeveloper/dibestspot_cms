@@ -4,8 +4,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\v1\Admin\AdminContoller;
 use App\Http\Controllers\v1\User\UserController;
 use App\Http\Controllers\PlatformController;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+
+
+Auth::routes(['verify' => true]);
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,8 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('platform', PlatformController::class);
-    Route::post('/platform/store', [PlatformController::class, 'store'])->name('platform.store');
-
+    Route::get('index', [ PlatformController::class, 'index'])->name('platform.index');
+    Route::get('index', [ PlatformController::class, 'create'])->name('platform.index');
+    Route::post('create', [ PlatformController::class, 'store'])->name('platform.store');
+    Route::get('platform/edit/{id}', [ PlatformController::class, 'edit'])->name('platform.edit');
+    Route::put('platform/update/{id}', [ PlatformController::class, 'update'])->name('platform.update');
+    Route::delete('platform/delete/{id}', [ PlatformController::class, 'destroy'])->name('platform.destroy');
 });
 
 
