@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Dashboard') }}
+            {{ __('DiBest Spot Marketplaces') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div class="grid grid-cols-1 gap-6 p-6 text-gray-900 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                     @forelse($userMarketplaces as $marketplace)
                         <div
                             class="overflow-hidden border-2 border-sky-900 bg-white shadow-md hover:bg-gray-500 sm:rounded-lg">
