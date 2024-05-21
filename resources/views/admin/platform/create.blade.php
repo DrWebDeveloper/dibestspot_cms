@@ -13,9 +13,8 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div>
-                    <form class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2"
-                        action="{{ route('platform.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('platform.store') }}" method="POST" enctype="multipart/form-data">
+                    <div class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                         @csrf
                         <div>
                             <x-input-label for="name" :value="__('Name:')" />
@@ -25,11 +24,18 @@
                         </div>
 
                         <div>
+                            <x-input-label for="description" :value="__('Description: ')" />
+                            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"
+                                :value="old('description')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('description')" />
+                        </div>
+
+                        {{-- <div>
                             <x-input-label for="slug" :value="__('Slug:')" />
                             <x-text-input id="slug" name="slug" type="text" class="mt-1 block w-full"
                                 :value="old('slug')" required />
                             <x-input-error class="mt-2" :messages="$errors->get('slug')" />
-                        </div>
+                        </div> --}}
 
                         <div>
                             <x-input-label for="logo" :value="__('Logo: ')" />
@@ -47,7 +53,7 @@
 
 
                         <div>
-                            <x-input-label for="url" :value="__('Url: ')" />
+                            <x-input-label for="url" :value="__('URL: ')" />
                             <x-text-input id="url" name="url" type="text" class="mt-1 block w-full"
                                 :value="old('url')" />
                             <x-input-error class="mt-2" :messages="$errors->get('url')" />
@@ -76,20 +82,19 @@
                             <x-input-error class="mt-2" :messages="$errors->get('smtp')" />
                         </div>
 
-
                         <div>
-                            <x-input-label for="support_email" :value="__('Email: ')" />
-                            <x-text-input id="support_email" name="support_email" type="text"
-                                class="mt-1 block w-full" :value="old('support_email')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('support_email')" />
+                            <x-input-label for="admin_email" :value="__('Admin Email: ')" />
+                            <x-text-input id="admin_email" name="admin_email" type="text" class="mt-1 block w-full"
+                                :value="old('admin_email')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('admin_email')" />
                         </div>
 
 
                         <div>
-                            <x-input-label for="description" :value="__('Description: ')" />
-                            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"
-                                :value="old('description')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('description')" />
+                            <x-input-label for="support_email" :value="__('Support Email: ')" />
+                            <x-text-input id="support_email" name="support_email" type="text"
+                                class="mt-1 block w-full" :value="old('support_email')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('support_email')" />
                         </div>
 
 
@@ -100,19 +105,11 @@
                             <x-input-error class="mt-2" :messages="$errors->get('auto_login')" />
                         </div>
 
-
                         <div>
                             <x-input-label for="auto_register" :value="__('Auto Register: ')" />
                             <x-text-input type="checkbox" id="auto_register" name="auto_register" type="text"
                                 class="mt-1 block w-full" :value="old('auto_register')" />
                             <x-input-error class="mt-2" :messages="$errors->get('auto_register')" />
-                        </div>
-
-                        <div>
-                            <x-input-label for="admin_email" :value="__('Admin Email: ')" />
-                            <x-text-input id="admin_email" name="admin_email" type="text" class="mt-1 block w-full"
-                                :value="old('admin_email')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('admin_email')" />
                         </div>
 
                         <div>
@@ -122,7 +119,7 @@
                             <x-input-error class="mt-2" :messages="$errors->get('admin_url')" />
                         </div>
 
-                        <div>
+                        {{-- <div>
                             <x-input-label for="metadata" :value="__('MetaData: ')" />
                             <x-text-input id="metadata" name="metadata" type="text" class="mt-1 block w-full"
                                 :value="old('metadata')" />
@@ -134,7 +131,7 @@
                             <x-text-input id="setting" name="setting" type="text" class="mt-1 block w-full"
                                 :value="old('setting')" />
                             <x-input-error class="mt-2" :messages="$errors->get('setting')" />
-                        </div>
+                        </div> --}}
 
                         <div>
                             <x-input-label for="api_keys" :value="__('Api Key: ')" />
@@ -159,7 +156,7 @@
                         </div>
 
 
-                        <div>
+                        {{-- <div>
                             <x-input-label for="api_url" :value="__('Api URL ')" />
                             <x-text-input id="api_url" name="api_url" type="text" class="mt-1 block w-full"
                                 :value="old('api_url')" />
@@ -185,7 +182,7 @@
                             <x-text-input id="redirect_url" name="redirect_url" type="text"
                                 class="mt-1 block w-full" :value="old('redirect_url')" />
                             <x-input-error class="mt-2" :messages="$errors->get('redirect_url')" />
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <x-input-label for="environment" :value="__('Environment: ')" />
@@ -226,11 +223,11 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <x-input-label for="country" :value="__('Country')" />
                             @include('components.countries')
                             <x-input-error :messages="$errors->get('country')" class="mt-2" />
-                        </div>
+                        </div> --}}
 
 
                         <div class="mb-3">
@@ -241,15 +238,16 @@
                                 <option>Inactive</option>
                             </select>
                         </div>
+                    </div>
 
-                        <div class="mb-3 flex justify-between">
-                            <a href="{{ route('admin.platform.index') }}"><x-secondary-button
-                                    :>{{ __('Go Back') }}</x-secondary-button></a>
-                            <x-primary-button>{{ __('Save') }}</x-primary-button>
-                        </div>
+                    <div class="mb-3 px-6 flex justify-between">
+                        <a href="{{ route('admin.platform.index') }}"><x-secondary-button
+                                :>{{ __('Go Back') }}</x-secondary-button></a>
+                        <x-primary-button>{{ __('Save') }}</x-primary-button>
+                    </div>
 
-                    </form>
-                </div>
+
+                </form>
             </div>
         </div>
     </div>
