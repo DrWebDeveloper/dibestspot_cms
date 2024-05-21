@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -28,8 +29,28 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
+        if($request->has('first_name')) {
+            $request->user()->first_name = $request->first_name;
+        }
+
+        if($request->has('last_name')) {
+            $request->user()->last_name = $request->last_name;
+        }
+
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
+        }
+
+        if($request->has('password')) {
+            $request->user()->password = Hash::make($request->password);
+        }
+
+        if($request->has('phone_number')) {
+            $request->user()->phone_number = $request->phone_number;
+        }
+
+        if($request->has('country')) {
+            $request->user()->country = $request->country;
         }
 
         $request->user()->save();
