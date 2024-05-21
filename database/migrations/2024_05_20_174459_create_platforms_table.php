@@ -39,7 +39,7 @@ return new class extends Migration
             $table->enum('type', ['payment', 'marketplace', 'crowdfunding', 'e-commerce', 'social', 'other', ])->default('other');
             $table->enum('category', ['finance', 'entertainment', 'education', 'health', 'news', 'social', 'other', ])->default('other');
             $table->string('country')->nullable();
-            $table->enum('status', ['active', 'inactive', 'suspended', 'pending', ])->default('inactive');
+            $table->enum('status', ['active', 'inactive', 'suspended', 'pending', 'maintenance', ])->default('pending');
             $table->timestamps();
         });
     }
