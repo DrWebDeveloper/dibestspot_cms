@@ -18,7 +18,7 @@
         </div>
         <div class="mt-4">
             <x-input-label for="last_name" :value="__('Last Name')" />
-            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="family-name" />
+            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autocomplete="family-name" />
             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
         </div>
 
@@ -83,17 +83,14 @@
             </x-primary-button>
         </div>
 
-        {{-- <script>
-            document.addEventListener("DOMContentLoaded", function(){
-                var input = document.querySelector("#phone_number");
-                intlTelInput(input, {
-                    initialCountry: "auto",
-                    separateDialCode: true,
-                    preferredCountries: ['us', 'gb'],
-                    autoPlaceholder: "off"
-                });
-            });
-            </script> --}}
     </form>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"></script> --}}
+
+    <script>
+        // on page load, select the Cayman Islands as the default country
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                document.getElementById('country').value = 'Cayman Islands';
+            }
+        }
+    </script>
 </x-guest-layout>
