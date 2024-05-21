@@ -75,5 +75,28 @@ class Platform extends Model
 
     public function scopeSuspended($query) {
         return $query->where('status', 'suspended');
+    }
+
+    /**
+     * Scope a query to only include platforms where login is enabled.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+
+    public function scopeLoginEnabled($query) {
+        return $query->where('auto_login', 'enabled');
+    }
+
+    /**
+     * Scope a query to only include platforms where register is enabled.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+
+    public function scopeAutoRegistertionEnabled($query) {
+        return $query->where('auto_register', 'enabled');
+    }
 
 }
