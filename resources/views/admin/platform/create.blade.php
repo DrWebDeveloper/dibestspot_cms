@@ -186,19 +186,26 @@
                             <x-input-error class="mt-2" :messages="$errors->get('redirect_url')" />
                         </div>
 
-                        <div>
-                            <x-input-label for="enviornment" :value="__('Enviornment: ')" />
-                            <x-text-input id="enviornment" name="enviornment" type="text"
-                                class="mt-1 block w-full" :value="old('enviornment')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('enviornment')" />
+                        <div class="mb-3">
+                            <x-input-label for="environment" :value="__('Environment: ')" />
+                            <select id="environment" name="environment"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option selected>Development</option>
+                                <option>Stagging</option>
+                                <option>Production</option>
+                            </select>
                         </div>
 
                         <div class="mb-3">
                             <x-input-label for="type" :value="__('Type: ')" />
                             <select id="type" name="type"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option selected>Website</option>
-                                <option>App</option>
+                                <option selected>Payment</option>
+                                <option>Crowdfunding</option>
+                                <option>E-commerce</option>
+                                <option>Social</option>
+                                <option>Other</option>
+
                             </select>
                         </div>
 
@@ -206,9 +213,15 @@
                             <x-input-label for="category" :value="__('Category: ')" />
                             <select id="category" name="category"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option selected>General</option>
-                                <option>Ecommerce</option>
-                                <option>Blog</option>
+                                <option selected>Finance</option>
+                                <option>Entertainment</option>
+                                <option>Education</option>
+                                <option>Health</option>
+                                <option>News</option>
+                                <option>Social</option>
+                                <option>Other</option>
+
+
                             </select>
                         </div>
 
