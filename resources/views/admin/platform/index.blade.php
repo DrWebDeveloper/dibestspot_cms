@@ -1,15 +1,16 @@
-<layouts.app_admin>
+<x-admin-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+            {{ __('Platforms') }}
+        </h2>
+    </x-slot>
 
-    <div class="container-fluid">
-        <div class="col-md-6">
-                <h5>Course Features Detail</h5>
+    <div class="py-12">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+                </div>
+            </div>
         </div>
-        <div class="col-md-6" style="text-align: right;  margin-left: auto;">
-                <a href="{{ route('platform.create') }}">
-                <button class="btn btn-outline-secondary ladda-button example-button m-1" data-style="expand-left"><span class="ladda-label">Add Platforms</span></button></a>
-        </div>
-</a>
-</div>
-
-
-</layouts.app_admin>
+    </div>
+</x-admin-app-layout>

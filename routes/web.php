@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Auth::routes(['verify' => true]);
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,12 +51,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin']
     Route::get('/dashboard', [AdminContoller::class, 'dashboard'])->name('dashboard');
 
     // Routes for Platform
-    Route::get('index', [ PlatformController::class, 'index'])->name('platform.index');
-    Route::get('index', [ PlatformController::class, 'create'])->name('platform.index');
-    Route::post('create', [ PlatformController::class, 'store'])->name('platform.store');
-    Route::get('platform/edit/{id}', [ PlatformController::class, 'edit'])->name('platform.edit');
-    Route::put('platform/update/{id}', [ PlatformController::class, 'update'])->name('platform.update');
-    Route::delete('platform/delete/{id}', [ PlatformController::class, 'destroy'])->name('platform.destroy');
+    Route::prefix('platform')->name('platform.')->group(function () {
+        Route::get('/', [PlatformController::class, 'index'])->name('index');
+        Route::get('/create', [PlatformController::class, 'create'])->name('create');
+        Route::post('/store', [PlatformController::class, 'store'])->name('store');
+        Route::get('/{platform_id}', [PlatformController::class, 'show'])->name('show');
+        Route::get('/{platform_id}/edit', [PlatformController::class, 'edit'])->name('edit');
+        Route::put('/{platform_id}', [PlatformController::class, 'update'])->name('update');
+        Route::delete('/{platform_id}', [PlatformController::class, 'destroy'])->name('destroy');
+    });
 
 });
 
