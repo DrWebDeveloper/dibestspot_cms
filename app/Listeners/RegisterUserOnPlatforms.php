@@ -24,22 +24,15 @@ class RegisterUserOnPlatforms
     public function handle(UserRegistered $event): void
     {
         $user = $event->user;
-        // Register user on platforms
 
-        // Get the platforms where the user has to be registered
-        $platforms_ids = Platform::active()->pluck('id');
-
-        // Get the user current platforms
-        $user_platforms = $user->platforms()->pluck('id');
-
-        // Get the platforms where the user has to be registered
-        $platforms = Platform::whereIn('id', $platforms_ids)
-            ->whereNotIn('id', $user_platforms)
+        // Get the platform IDs where the user has to be registered
+        $platformsToRegister = Platform::active()
+            ->whereNotIn('id', $user->platforms()->pluck('id')->toArray())
             ->get();
 
         // Dispatch a job for each platform
-        foreach ($platforms as $platform) {
+        $platformsToRegister->each(function ($platform) use ($user) {
             PlatformRegistration::dispatch($user, $platform);
-        }
+        });
     }
 }
