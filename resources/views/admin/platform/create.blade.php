@@ -83,6 +83,11 @@
                             <x-input-error class="mt-2" :messages="$errors->get('support_email')" />
                         </div>
 
+                        <div class="mb-3">
+                            <x-input-label for="country" :value="__('Country')" />
+                                @include('components.countries')
+                            <x-input-error :messages="$errors->get('country')" class="mt-2" />
+                        </div>
 
                         <div>
                             <x-input-label for="description" :value="__('Description: ')" />
@@ -91,21 +96,28 @@
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
 
-
-                        <div>
-                            <x-input-label for="auto_login" :value="__('Auto Login: ')" />
-                            <x-text-input type="checkbox" id="auto_login" name="auto_login" type="text"
-                                class="mt-1 block w-full" :value="old('auto_login')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('auto_login')" />
-                        </div>
-
-
-                        <div>
+                        <div class="mb-3">
                             <x-input-label for="auto_register" :value="__('Auto Register: ')" />
-                            <x-text-input type="checkbox" id="auto_register" name="auto_register" type="text"
-                                class="mt-1 block w-full" :value="old('auto_register')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('auto_register')" />
+                            <select id="auto_register" name="auto_register"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option>Enabled</option>
+                                <option>Disabled</option>
+                                <option>Blocked</option>
+
+                            </select>
                         </div>
+
+                        <div class="mb-3">
+                            <x-input-label for="auto_login" :value="__('Auto Login: ')" />
+                            <select id="auto_login" name="auto_login"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option>Enabled</option>
+                                <option>Disabled</option>
+                                <option>Blocked</option>
+
+                            </select>
+                        </div>
+
 
                         <div>
                             <x-input-label for="admin_email" :value="__('Admin Email: ')" />
@@ -225,11 +237,7 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <x-input-label for="country" :value="__('Country')" />
-                                @include('components.countries')
-                            <x-input-error :messages="$errors->get('country')" class="mt-2" />
-                        </div>
+
 
 
                         <div class="mb-3">
@@ -238,6 +246,10 @@
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option selected>Active</option>
                                 <option>Inactive</option>
+                                <option>Suspended</option>
+                                <option>Pending</option>
+                                <option>Maintenance</option>
+
                             </select>
                         </div>
 
