@@ -18,8 +18,8 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('platform.index')" :active="request()->routeIs('platform.index')">
-                        {{ __('Platform') }}
+                    <x-nav-link :href="route('admin.platform.index')" :active="request()->routeIs('platform.index')">
+                        {{ __('Platforms') }}
                     </x-nav-link>
 
                 </div>

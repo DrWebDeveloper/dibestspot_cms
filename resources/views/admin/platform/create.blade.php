@@ -9,65 +9,79 @@
         <form action="{{ route('platform.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+
+            <div>
+                <x-input-label for="name" :value="__('Name:')" />
+                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
-            <div class="mb-3">
-                <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter slug">
+
+            <div>
+                <x-input-label for="slug" :value="__('Slug:')" />
+                <x-text-input id="slug" name="slug" type="text" class="mt-1 block w-full" :value="old('slug', $user->slug)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('slug')" />
             </div>
 
-            <div class="mb-3">
-                <label for="logo" class="form-label">Logo</label>
-                <input type="file" class="form-control" id="logo" name="logo">
+            <div>
+                <x-input-label for="logo" :value="__('Logo: ')" />
+                <x-text-input id="logo" name="logo" type="text" class="mt-1 block w-full" :value="old('logo', $user->logo)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('logo')" />
             </div>
 
-            <div class="mb-3">
-                <label for="photo" class="form-label">Photo</label>
-                <input type="file" class="form-control" id="photo" name="photo">
+            <div>
+                <x-input-label for="photo" :value="__('Photo: ')" />
+                <x-text-input id="photo" name="photo" type="text" class="mt-1 block w-full" :value="old('photo', $user->photo)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('photo')" />
             </div>
 
-            <div class="mb-3">
-                <label for="url" class="form-label">URL</label>
-                <input type="text" class="form-control" id="url" name="url" placeholder="Enter URL">
+
+            <div>
+                <x-input-label for="url" :value="__('Url: ')" />
+                <x-text-input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url', $user->url)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('url')" />
             </div>
 
-            <div class="mb-3">
-                <label for="domain" class="form-label">Domain</label>
-                <input type="text" class="form-control" id="domain" name="domain" placeholder="Enter domain">
+            <div>
+                <x-input-label for="domain" :value="__('Domain: ')" />
+                <x-text-input id="domain" name="domain" type="text" class="mt-1 block w-full" :value="old('domain', $user->domain)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('domain')" />
             </div>
 
-            <div class="mb-3">
-                <label for="homepage" class="form-label">Homepage</label>
-                <input type="text" class="form-control" id="homepage" name="homepage"
-                    placeholder="Enter homepage URL">
+
+            <div>
+                <x-input-label for="homepage_url" :value="__('HomePage URL')" />
+                <x-text-input id="homepage_url" name="homepage_url" type="text" class="mt-1 block w-full" :value="old('homepage_url', $user->homepage_url)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('homepage_url')" />
             </div>
 
-            <div class="mb-3">
-                <label for="smtp" class="form-label">SMTP</label>
-                <input type="text" class="form-control" id="smtp" name="smtp"
-                    placeholder="Enter SMTP server">
+
+            <div>
+                <x-input-label for="smtp" :value="__('SMTP: ')" />
+                <x-text-input id="smtp" name="smtp" type="text" class="mt-1 block w-full" :value="old('smtp', $user->smtp)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('smtp')" />
             </div>
 
-            <div class="mb-3">
-                <label for="support_email" class="form-label">Support Email</label>
-                <input type="email" class="form-control" id="support_email" name="support_email"
-                    placeholder="Enter support email">
+
+            <div>
+                <x-input-label for="support_email" :value="__('Email: ')" />
+                <x-text-input id="support_email" name="support_email" type="text" class="mt-1 block w-full" :value="old('support_email', $user->support_email)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('support_email')" />
             </div>
 
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+
+            <div>
+                <x-input-label for="description" :value="__('Description: ')" />
+                <x-text-input id="description" name="description" type="text" class="mt-1 block w-full" :value="old('description', $user->description)" required autofocus />
+                <x-input-error class="mt-2" :messages="$errors->get('description')" />
             </div>
 
-            <div class="mb-3">
-                <label for="auto_login" class="form-label">Auto Login</label>
+
+
                 <input type="checkbox" class="form-check-input" id="auto_login" name="auto_login">
-            </div>
 
-            <div class="mb-3">
+
+                <div class="mb-3">
                 <label for="auto_register" class="form-label">Auto Register</label>
                 <input type="checkbox" class="form-check-input" id="auto_register" name="auto_register">
             </div>
