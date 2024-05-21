@@ -61,4 +61,14 @@ class User extends Authenticatable
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
+    /**
+     * Get the user's platforms.
+     *
+    */
+
+    public function platforms(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(UserPlatform::class);
+    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('platform_user_username')->nullable();
             $table->string('platform_user_email')->nullable();
             $table->string('platform_user_phone')->nullable();
+            $table->timestamp('platform_user_last_login')->nullable();
             $table->string('platform_user_role')->nullable();
             $table->string('platform_user_token')->nullable();
             $table->string('platform_user_secret')->nullable();
