@@ -61,10 +61,10 @@
 
 
                         <div>
-                            <x-input-label for="page_url" :value="__('HomePage URL')" />
-                            <x-text-input id="page_url" name="page_url" type="text" class="mt-1 block w-full"
-                                :value="old('page_url')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('page_url')" />
+                            <x-input-label for="homepage" :value="__('HomePage URL')" />
+                            <x-text-input id="homepage" name="homepage" type="text" class="mt-1 block w-full"
+                                :value="old('homepage')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('homepage')" />
                         </div>
 
 
