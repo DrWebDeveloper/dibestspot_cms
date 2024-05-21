@@ -9,10 +9,9 @@
         <form action="{{ route('platform.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-
             <div>
                 <x-input-label for="name" :value="__('Name:')" />
-                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autofocus />
+                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" require />
                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
@@ -92,67 +91,67 @@
 
             <div>
             <x-input-label for="admin_email" :value="__('Admin Email: ')" />
-            <x-text-input id="admin_email" name="admin_email" type="text" class="mt-1 block w-full" :value="old('admin_email', $user->admin_email)"  autofocus />
+            <x-text-input id="admin_email" name="admin_email" type="text" class="mt-1 block w-full" :value="old('admin_email')" />
             <x-input-error class="mt-2" :messages="$errors->get('admin_email')" />
         </div>
 
         <div>
             <x-input-label for="admin_url" :value="__('Admin URL: ')" />
-            <x-text-input id="admin_url" name="admin_url" type="text" class="mt-1 block w-full" :value="old('admin_url', $user->admin_url)"  autofocus />
+            <x-text-input id="admin_url" name="admin_url" type="text" class="mt-1 block w-full" :value="old('admin_url')" />
             <x-input-error class="mt-2" :messages="$errors->get('admin_url')" />
         </div>
 
         <div>
             <x-input-label for="metadata" :value="__('MetaData: ')" />
-            <x-text-input id="metadata" name="metadata" type="text" class="mt-1 block w-full" :value="old('metadata', $user->metadata)"  autofocus />
+            <x-text-input id="metadata" name="metadata" type="text" class="mt-1 block w-full" :value="old('metadata')" />
             <x-input-error class="mt-2" :messages="$errors->get('metadata')" />
         </div>
 
         <div>
             <x-input-label for="setting" :value="__('Setting: ')" />
-            <x-text-input id="setting" name="setting" type="text" class="mt-1 block w-full" :value="old('setting', $user->setting)"  autofocus />
+            <x-text-input id="setting" name="setting" type="text" class="mt-1 block w-full" :value="old('setting')" />
             <x-input-error class="mt-2" :messages="$errors->get('setting')" />
         </div>
 
         <div>
             <x-input-label for="api_keys" :value="__('Api Key: ')" />
-            <x-text-input id="api_keys" name="api_keys" type="text" class="mt-1 block w-full" :value="old('api_keys', $user->api_keys)"  autofocus />
+            <x-text-input id="api_keys" name="api_keys" type="text" class="mt-1 block w-full" :value="old('api_keys')" />
             <x-input-error class="mt-2" :messages="$errors->get('api_keys')" />
         </div>
 
         <div>
             <x-input-label for="api_url" :value="__('Api URL ')" />
-            <x-text-input id="api_url" name="api_url" type="text" class="mt-1 block w-full" :value="old('api_url', $user->api_url)"  autofocus />
+            <x-text-input id="api_url" name="api_url" type="text" class="mt-1 block w-full" :value="old('api_url')" />
             <x-input-error class="mt-2" :messages="$errors->get('api_url')" />
         </div>
 
         <div>
             <x-input-label for="webhook_url" :value="__('WebHook URL: ')" />
-            <x-text-input id="webhook_url" name="webhook_url" type="text" class="mt-1 block w-full" :value="old('webhook_url', $user->webhook_url)"  autofocus />
+            <x-text-input id="webhook_url" name="webhook_url" type="text" class="mt-1 block w-full" :value="old('webhook_url')" />
             <x-input-error class="mt-2" :messages="$errors->get('webhook_url')" />
         </div>
 
         <div>
             <x-input-label for="callback_url" :value="__('Callback URL')" />
-            <x-text-input id="callback_url" name="callback_url" type="text" class="mt-1 block w-full" :value="old('callback_url', $user->callback_url)"  autofocus />
+            <x-text-input id="callback_url" name="callback_url" type="text" class="mt-1 block w-full" :value="old('callback_url')" />
             <x-input-error class="mt-2" :messages="$errors->get('callback_url')" />
         </div>
 
         <div>
             <x-input-label for="redirect_url" :value="__('Redirect URL: ')" />
-            <x-text-input id="redirect_url" name="redirect_url" type="text" class="mt-1 block w-full" :value="old('redirect_url', $user->redirect_url)"  autofocus />
+            <x-text-input id="redirect_url" name="redirect_url" type="text" class="mt-1 block w-full" :value="old('redirect_url')" />
             <x-input-error class="mt-2" :messages="$errors->get('redirect_url')" />
         </div>
 
         <div>
             <x-input-label for="enviornment" :value="__('Enviornment: ')" />
-            <x-text-input id="enviornment" name="enviornment" type="text" class="mt-1 block w-full" :value="old('enviornment', $user->enviornment)"  autofocus />
+            <x-text-input id="enviornment" name="enviornment" type="text" class="mt-1 block w-full" :value="old('enviornment')" />
             <x-input-error class="mt-2" :messages="$errors->get('enviornment')" />
         </div>
 
             <div class="mb-3">
-                <label for="type" class="form-label">Type</label>
-                <select class="form-select" id="type" name="type">
+                <x-input-label for="type" :value="__('Type: ')" />
+                <select id="type" name="type" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
                     <option selected>Website</option>
                     <option>App</option>
                 </select>
