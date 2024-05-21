@@ -71,4 +71,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserPlatform::class);
     }
+
+    /**
+     * Scope a query to only include non-admin users
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+
+    public function scopeNonAdmin($query) {
+        return $query->where('role','!=', 'admin');
+    }
 }
