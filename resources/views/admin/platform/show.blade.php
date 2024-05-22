@@ -17,8 +17,8 @@
                 <div class="grid w-full grid-cols-1 gap-6 p-6 text-gray-900">
                     <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg lg:flex-row">
                         <div class="h-48 flex-none overflow-hidden bg-cover text-center lg:h-auto lg:w-48"
-                            style="background-image: url({{ asset('/storage/assets/images/platforms/medical.jpg') }})"
-                            title="Woman holding a mug">
+                            style="background-image: url({{ asset('storage/' . $platform->photo) }})"
+                            title="{{ $platform->name }}">
                         </div>
                         <div class="flex flex-col justify-between p-4 leading-normal lg:w-full">
                             <div class="mb-8">
@@ -34,10 +34,10 @@
                                 <p class="text-base text-gray-700">{{ $platform->description }}</p>
                             </div>
                             <div class="flex items-center">
-                                <img class="mr-4 h-10 w-10 rounded-full" src="/img/jonathan.jpg"
-                                    alt="Avatar of Jonathan Reinink">
+                                <img class="mr-4 h-10 w-10 rounded-full" src="{{ asset('storage/' . $platform->logo) }}"
+                                    alt="{{ $platform->name }}">
                                 <div class="text-sm">
-                                    <p class="leading-none text-gray-900">Jonathan Reinink</p>
+                                    <p class="leading-none text-gray-900">{{ $platform->name }}</p>
                                     <p class="text-gray-600">Aug 18</p>
                                 </div>
                             </div>

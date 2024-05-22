@@ -26,7 +26,7 @@ class PlatformController extends Controller
     public function store(Request $request)
     {
         $request->merge([
-            'slug' => Str::slug($request->name).rand(100000, 999999),
+            'slug' => Str::slug($request->name) . rand(100000, 999999),
 
         ]);
 
@@ -56,6 +56,30 @@ class PlatformController extends Controller
         ]);
 
         if (Platform::create($validatedData)) {
+            // store the logo image if it exists
+            if ($request->hasFile('logo')) {
+                // store the logo image
+                $logo = $request->file('logo');
+                $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
+                $logo->storeAs('public/platforms/' . $validatedData['slug'], $fileName);
+
+                // store the logo path in the database
+                $platform = Platform::where('slug', $validatedData['slug'])->first();
+                $platform->logo = 'platforms/' . $validatedData['slug'] . '/' . $fileName;
+                $platform->update();
+            }
+            if ($request->hasFile('photo')) {
+                // store the photo image
+                $photo = $request->file('photo');
+                $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
+                $photo->storeAs('public/platforms/' . $validatedData['slug'], $fileName);
+
+                // store the photo path in the database
+                $platform = Platform::where('slug', $validatedData['slug'])->first();
+                $platform->photo = 'platforms/' . $validatedData['slug'] . '/' . $fileName;
+                $platform->update();
+            }
+
             flash()->success('Platform created successfully');
             return redirect()->route('admin.platform.index');
         }
@@ -77,7 +101,7 @@ class PlatformController extends Controller
     {
         $platform = Platform::find($platform_id);
         $request->merge([
-            'slug' => Str::slug($request->name).'-'.rand(100000, 999999),
+            'slug' => Str::slug($request->name) . '-' . rand(100000, 999999),
 
         ]);
         $validatedData = $request->validate([
@@ -105,6 +129,8 @@ class PlatformController extends Controller
             'status' => 'required|in:active,inactive,suspended,pending,maintenance',
         ]);
 
+
+
         try {
             DB::beginTransaction();
             $platform->name = $validatedData['name'];
@@ -129,6 +155,29 @@ class PlatformController extends Controller
             $platform->status = $validatedData['status'];
             if ($platform->update()) {
                 DB::commit();
+                if ($request->hasFile('logo')) {
+                    // store the logo image
+                    $logo = $request->file('logo');
+                    $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
+                    $logo->storeAs('public/platforms/' . $validatedData['slug'], $fileName);
+
+                    // store the logo path in the database
+                    $platform = Platform::where('slug', $validatedData['slug'])->first();
+                    $platform->logo = 'platforms/' . $validatedData['slug'] . '/' . $fileName;
+                    $platform->update();
+                }
+                if ($request->hasFile('photo')) {
+                    // store the photo image
+                    $photo = $request->file('photo');
+                    $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
+                    $photo->storeAs('public/platforms/' . $validatedData['slug'], $fileName);
+
+                    // store the photo path in the database
+                    $platform = Platform::where('slug', $validatedData['slug'])->first();
+                    $platform->photo = 'platforms/' . $validatedData['slug'] . '/' . $fileName;
+                    $platform->update();
+                }
+
                 flash()->success('Platform updated successfully.');
                 return redirect()->route('admin.platform.index');
             }
@@ -137,7 +186,6 @@ class PlatformController extends Controller
             flash()->error('Platform update failed.');
             return redirect()->back();
         }
-
     }
 
     public function destroy(Platform $platform)
