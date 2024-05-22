@@ -94,7 +94,6 @@
                                 <option value="enabled">Enabled</option>
                                 <option value="disabled">Disabled</option>
                                 <option value="blocked">Blocked</option>
-
                             </select>
                         </div>
 
@@ -105,7 +104,6 @@
                                 <option value="enabled">Enabled</option>
                                 <option value="disabled">Disabled</option>
                                 <option value="blocked">Blocked</option>
-
                             </select>
                         </div>
 
@@ -119,8 +117,8 @@
 
                         <div>
                             <x-input-label for="auto_login_url" :value="__('Auto Login URL: ')" />
-                            <x-text-input id="auto_login_url" name="auto_login_url" type="text" class="mt-1 block w-full"
-                                :value="old('auto_login_url')" />
+                            <x-text-input id="auto_login_url" name="auto_login_url" type="text"
+                                class="mt-1 block w-full" :value="old('auto_login_url')" />
                             <x-input-error class="mt-2" :messages="$errors->get('auto_login_url')" />
                         </div>
 
@@ -213,6 +211,19 @@
                         </div>
 
                         <div class="mb-3">
+                            <x-input-label for="package" :value="__('Default Package: ')" />
+                            <select id="package" name="package"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="payment" selected>Payment</option>
+                                <option value="marketplace" selected>Marketplace</option>
+                                <option value="crowdfunding">Crowdfunding</option>
+                                <option value="e-commerce">E-commerce</option>
+                                <option value="social">Social</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
                             <x-input-label for="category" :value="__('Category: ')" />
                             <select id="category" name="category"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
@@ -237,21 +248,42 @@
                                 <option value="maintenance">Maintenance</option>
                             </select>
                         </div>
+
+
+                        <div class="mb-3">
+                            <x-input-label for="logo" :value="__('Logo: ')" class="w-1/4" />
+                            <label for="logo"
+                                class="mt-1 flex w-full cursor-pointer items-center justify-center rounded-lg border border-blue-500 bg-white px-4 py-2 text-blue-700 shadow-sm hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <svg class="mr-2 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 16v-2a4 4 0 014-4h10a4 4 0 014 4v2M7 16v6h10v-6M8 12l4-4m0 0l4 4m-4-4v16" />
+                                </svg>
+                                <span>Choose a logo</span>
+                                <input id="logo" name="logo" type="file" class="sr-only"
+                                    :value="old('logo')" />
+                            </label>
+                            <x-input-error class="mt-2" :messages="$errors->get('logo')" />
+                        </div>
+
+                        <div class="mb-3">
+                            <x-input-label for="photo" :value="__('Photo: ')" class="w-1/4" />
+                            <label for="photo"
+                                class="mt-1 flex w-full cursor-pointer items-center justify-center rounded-lg border border-blue-500 bg-white px-4 py-2 text-blue-700 shadow-sm hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <svg class="mr-2 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 16v-2a4 4 0 014-4h10a4 4 0 014 4v2M7 16v6h10v-6M8 12l4-4m0 0l4 4m-4-4v16" />
+                                </svg>
+                                <span>Choose a photo</span>
+                                <input id="photo" name="photo" type="file" class="sr-only"
+                                    :value="old('photo')" />
+                            </label>
+                            <x-input-error class="mt-2" :messages="$errors->get('photo')" />
+                        </div>
                     </div>
 
-                    <div class="flex">
-                        <x-input-label for="logo" :value="__('Logo: ')" />
-                        <input id="logo" name="logo" type="file" class="mt-1 block w-full"
-                            :value="old('logo')" />
-                        <x-input-error class="mt-2" :messages="$errors->get('logo')" />
-
-                        <x-input-label for="photo" :value="__('Photo: ')" />
-                        <input id="photo" name="photo" type="file" class="mt-1 block w-full"
-                            :value="old('photo')" />
-                        <x-input-error class="mt-2" :messages="$errors->get('photo')" />
-                    </div>
-                    <br>
-                    <div class="mb-3 px-6 flex justify-between">
+                    <div class="mb-3 flex justify-between px-6">
                         <a href="{{ route('admin.platform.index') }}"><x-secondary-button
                                 :>{{ __('Go Back') }}</x-secondary-button></a>
                         <x-primary-button>{{ __('Save') }}</x-primary-button>
