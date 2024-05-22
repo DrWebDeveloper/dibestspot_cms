@@ -63,24 +63,21 @@ class PlatformController extends Controller
                 $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
                 $logo->storeAs('public/platforms/' . $validatedData['slug'], $fileName);
 
-                // store the logo path in the database
                 $platform = Platform::where('slug', $validatedData['slug'])->first();
                 $platform->logo = 'platforms/' . $validatedData['slug'] . '/' . $fileName;
                 $platform->update();
             }
             if ($request->hasFile('photo')) {
-                // store the photo image
                 $photo = $request->file('photo');
                 $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
                 $photo->storeAs('public/platforms/' . $validatedData['slug'], $fileName);
 
-                // store the photo path in the database
                 $platform = Platform::where('slug', $validatedData['slug'])->first();
                 $platform->photo = 'platforms/' . $validatedData['slug'] . '/' . $fileName;
                 $platform->update();
             }
 
-            flash()->success('Platform created successfully');
+            session()->flash('success', 'Platform created successfully');
             return redirect()->route('admin.platform.index');
         }
     }
@@ -178,21 +175,36 @@ class PlatformController extends Controller
                     $platform->update();
                 }
 
-                flash()->success('Platform updated successfully.');
+                session()->flash('success', 'Platform updated successfully.');
                 return redirect()->route('admin.platform.index');
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            flash()->error('Platform update failed.');
+            session()->flash ('error', 'Platform update failed.');
             return redirect()->back();
         }
     }
 
-    public function destroy(Platform $platform)
-    {
-        $platform->delete();
+    // public function destroy(Platform $platform)
+    // {
+    //     $platform->delete();
 
-        flash()->error('Platform deleted successfully.');
-        return redirect()->route('admin.platform.index');
+    //     session()->flash('error', 'Platform deleted successfully.');
+    //     return redirect()->route('admin.platform.index');
+    // }
+
+
+    public function destroy($id)
+    {
+        $platform = Platform::findOrFail($id);
+        if ($platform) {
+            $platform->delete();
+            return redirect()->route('admin.platform.index')->with([
+                'message' => 'Platform Deleted Successfully',
+                'status' => 'success'
+            ]);
+        } else {
+            abort(404);
+        }
     }
 }

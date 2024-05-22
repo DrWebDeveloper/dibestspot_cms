@@ -2,9 +2,9 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Platforms') }} ({{ $platforms->count() }})
+                {{ __('Packages') }} ({{ $packages->count() }})
             </h2>
-            <a href="{{ route('admin.platform.create') }}" class="text-blue-500">
+            <a href="{{ route('admin.package.create') }}" class="text-blue-500">
                 <x-primary-button>{{ __('Add New') }}</x-primary-button>
             </a>
         </div>
@@ -15,38 +15,28 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="grid grid-cols-1 gap-6 p-6 text-gray-900">
-                    @forelse($platforms as $platform)
+                    @forelse($packages as $package)
                         <div
                             class="mb-4 overflow-hidden border-2 border-sky-900 bg-white shadow-md hover:bg-gray-100 sm:rounded-lg">
                             <div class="flex items-center justify-between border-b border-gray-200 bg-white p-6">
                                 <div>
-                                    <h2 class="text-2xl font-bold text-gray-800">{{ $platform->name }}</h2>
-                                    <p class="text-gray-600">{{ Str::limit($platform->description, 100) }}</p>
+                                    <h2 class="text-2xl font-bold text-gray-800">{{ $package->name }}</h2>
+                                    <p class="text-gray-600">{{ Str::limit($package->description, 100) }}</p>
                                 </div>
                                 <div class="flex items-center">
-                                    <a href="{{ route('admin.platform.show', $platform->id) }}" class="text-blue-500">
+                                    <a href="{{ route('admin.package.show', $package->id) }}" class="text-blue-500">
                                         <x-secondary-button class="ms-3">{{ __('View') }}</x-secondary-button>
                                     </a>
-                                    <a href="{{ route('admin.platform.edit', $platform->id) }}" class="text-blue-500">
+                                    <a href="{{ route('admin.package.edit', $package->id) }}" class="text-blue-500">
                                         <x-primary-button class="ms-3">{{ __('Edit') }}</x-primary-button>
                                     </a>
-                                    {{-- @if($platform->accounts->count())
-                                        <a href="#"
-                                            class="text-blue-500">
-                                            <x-danger-button class="ms-3" disabled>{{ __('Delete') }}</x-danger-button>
-                                        </a>
-                                        @else
-                                        <a href="{{ route('admin.platform.destroy', $platform->id) }}"
-                                            class="text-blue-500">
-                                            <x-danger-button class="ms-3">{{ __('Delete') }}</x-danger-button>
-                                        </a>
-                                    @endif --}}
 
-                                    <form action="{{ route('platform.destroy', $platform->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Platform?')">
+                                    <form action="{{ route('package.destroy', $package->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Package?')">
                                         @csrf
                                         @method('DELETE')
                                             <x-danger-button class="ms-3">{{ __('Delete') }}</x-danger-button>
                                     </form>
+
                                 </div>
                             </div>
 
@@ -62,15 +52,15 @@
                                 <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-2 md:grid-cols-3">
                                     <div>
                                         <p class="text-sm text-gray-500">No. of Users</p>
-                                        <p class="text-3xl font-bold text-gray-800">{{ $platform->accounts->count() }}</p>
+                                        <p class="text-3xl font-bold text-gray-800">{{ $package->accounts->count() }}</p>
                                     </div>
                                     <div>
                                         <p class="text-sm text-gray-500">No. of Vendors</p>
-                                        <p class="text-3xl font-bold text-gray-800">{{ $platform->accounts->count() }}</p>
+                                        <p class="text-3xl font-bold text-gray-800">{{ $package->accounts->count() }}</p>
                                     </div>
                                     <div>
                                         <p class="text-sm text-gray-500">Active Now</p>
-                                        <p class="text-3xl font-bold text-gray-800">{{ $platform->accounts->count() }}</p>
+                                        <p class="text-3xl font-bold text-gray-800">{{ $package->accounts->count() }}</p>
                                     </div>
                                     <!-- Add more statistics as needed -->
                                 </div>
@@ -82,7 +72,7 @@
 
 
                     <div class="col-span-full">
-                        {{ $platforms->links() }}
+                        {{ $packages->links() }}
                     </div>
                 </div>
             </div>

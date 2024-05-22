@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\v1\Admin\AdminContoller;
 use App\Http\Controllers\v1\User\UserController;
 use App\Http\Controllers\v1\Admin\PlatformController;
+use App\Http\Controllers\v1\Admin\PackageController;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
@@ -43,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('platform', PlatformController::class);
+    Route::resource('package', PackageController::class);
+
 });
 
 
@@ -58,8 +62,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin']
         Route::get('/{platform_id}/show', [PlatformController::class, 'show'])->name('show');
         Route::get('/{platform_id}/edit', [PlatformController::class, 'edit'])->name('edit');
         Route::post('/{platform_id}/update', [PlatformController::class, 'update'])->name('update');
-        Route::delete('/{platform_id}', [PlatformController::class, 'destroy'])->name('destroy');
+        // Route::delete('/{platform_id}', [PlatformController::class, 'destroy'])->name('destroy');
+        Route::delete('/{platform_id}/delete', [PlatformController::class, 'destroy'])->name('platform.destroy');
+
     });
+
+  Route::prefix('package')->name('package.')->group(function () {
+    Route::get('/', [PackageController::class, 'index'])->name('index');
+    Route::get('/create', [PackageController::class, 'create'])->name('create');
+    Route::post('/store', [PackageController::class, 'store'])->name('store');
+    Route::get('/{package_id}/show', [PackageController::class, 'show'])->name('show');
+    Route::get('/{package_id}/edit', [PackageController::class, 'edit'])->name('edit');
+    Route::post('/{package_id}/update', [PackageController::class, 'update'])->name('update');
+    Route::delete('/{package_id}/delete', [PackageController::class, 'destroy'])->name('package.destroy');
+});
 
 });
 
