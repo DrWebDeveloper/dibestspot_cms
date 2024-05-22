@@ -55,9 +55,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin']
         Route::get('/', [PlatformController::class, 'index'])->name('index');
         Route::get('/create', [PlatformController::class, 'create'])->name('create');
         Route::post('/store', [PlatformController::class, 'store'])->name('store');
-        Route::get('/{platform_id}', [PlatformController::class, 'show'])->name('show');
+        Route::get('/{platform_id}/show', [PlatformController::class, 'show'])->name('show');
         Route::get('/{platform_id}/edit', [PlatformController::class, 'edit'])->name('edit');
-        Route::put('/{platform_id}', [PlatformController::class, 'update'])->name('update');
+        Route::post('/{platform_id}/update', [PlatformController::class, 'update'])->name('update');
         Route::delete('/{platform_id}', [PlatformController::class, 'destroy'])->name('destroy');
     });
 

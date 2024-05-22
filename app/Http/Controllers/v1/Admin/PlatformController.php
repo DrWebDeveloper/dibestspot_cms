@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Platform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -15,9 +16,10 @@ class PlatformController extends Controller
     {
         return view('admin.platform.create');
     }
+
     public function index()
     {
-        $platforms = Platform::all();
+        $platforms = Platform::paginate(10);
         return view('admin.platform.index', compact('platforms'));
     }
 
@@ -59,18 +61,25 @@ class PlatformController extends Controller
         }
     }
 
-    public function edit(Platform $platform)
+    public function edit($platform_id)
     {
+        $platform = Platform::find($platform_id);
         return view('admin.platform.edit', compact('platform'));
     }
 
-    public function show(Platform $platform)
+    public function show($platform_id)
     {
+        $platform = Platform::findOrFail($platform_id);
         return view('admin.platform.show', compact('platform'));
     }
 
-    public function update(Request $request, Platform $platform)
+    public function update(Request $request, $platform_id)
     {
+        $platform = Platform::find($platform_id);
+        $request->merge([
+            'slug' => Str::slug($request->name),
+
+        ]);
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|alpha_dash|unique:platforms,slug',
@@ -96,17 +105,46 @@ class PlatformController extends Controller
             'status' => 'required|in:active,inactive,suspended,pending,maintenance',
         ]);
 
-        $platform->update($validatedData);
+        try {
+            DB::beginTransaction();
+            $platform->name = $validatedData['name'];
+            $platform->slug = $validatedData['slug'];
+            $platform->description = $validatedData['description'];
+            $platform->url = $validatedData['url'];
+            $platform->domain = $validatedData['domain'];
+            $platform->homepage = $validatedData['homepage'];
+            $platform->smtp = $validatedData['smtp'];
+            $platform->admin_email = $validatedData['admin_email'];
+            $platform->support_email = $validatedData['support_email'];
+            $platform->auto_register = $validatedData['auto_register'];
+            $platform->auto_login = $validatedData['auto_login'];
+            $platform->admin_url = $validatedData['admin_url'];
+            $platform->auto_login_url = $validatedData['auto_login_url'];
+            $platform->api_keys = $validatedData['api_keys'];
+            $platform->public_key = $validatedData['public_key'];
+            $platform->secret_key = $validatedData['secret_key'];
+            $platform->environment = $validatedData['environment'];
+            $platform->type = $validatedData['type'];
+            $platform->category = $validatedData['category'];
+            $platform->status = $validatedData['status'];
+            if ($platform->update()) {
+                DB::commit();
+                flash()->success('Platform updated successfully.');
+                return redirect()->route('admin.platform.index');
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            flash()->error('Platform update failed.');
+            return redirect()->back();
+        }
 
-        flash()->success('success', 'Platform updated successfully.');
-        return redirect()->route('platform.index');
     }
 
     public function destroy(Platform $platform)
     {
         $platform->delete();
 
-        flash()->error('success', 'Platform deleted successfully.');
-        return redirect()->route('platform.index');
+        flash()->error('Platform deleted successfully.');
+        return redirect()->route('admin.platform.index');
     }
 }

@@ -24,7 +24,7 @@
                                     <p class="text-gray-600">{{ Str::limit($platform->description, 100) }}</p>
                                 </div>
                                 <div class="flex items-center">
-                                    <a href="#" class="text-blue-500">
+                                    <a href="{{ route('admin.platform.show', $platform->id) }}" class="text-blue-500">
                                         <x-secondary-button class="ms-3">{{ __('View') }}</x-secondary-button>
                                     </a>
                                     <a href="{{ route('admin.platform.edit', $platform->id) }}" class="text-blue-500">
@@ -40,6 +40,9 @@
                         <div class="col-span-full text-center text-gray-600">No marketplaces available.</div>
                     @endforelse
 
+                    <div class="col-span-full">
+                        {{ $platforms->links() }}
+                    </div>
                 </div>
             </div>
         </div>
