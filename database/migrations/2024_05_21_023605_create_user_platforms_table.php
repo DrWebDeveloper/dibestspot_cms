@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_platforms', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->integer('platform_id')->unsigned();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('platform_id')->constrained()->noActionOnDelete();
             $table->string('platform_user_id');
             $table->string('platform_user_username')->nullable();
             $table->string('platform_user_email')->nullable();
