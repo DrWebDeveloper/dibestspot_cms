@@ -12,19 +12,46 @@
                     @forelse($userMarketplaces as $marketplace)
                         <div
                             class="overflow-hidden border-2 border-sky-900 bg-white shadow-md hover:bg-gray-500 sm:rounded-lg">
-                            <div class="border-b border-gray-200 bg-white p-6">
+                            <div class="bg-white p-6">
                                 <h2 class="text-2xl font-bold text-gray-800">{{ $marketplace->platform->name }}</h2>
                                 <p class="text-gray-600">{{ Str::limit($marketplace->platform->description, 100) }}</p>
-                                <a href="#" class="text-blue-500">Explore</a>
-                                <a href="{{ route('user.marketplace.login',$marketplace->id) }}" class="text-blue-500">
-                                    <x-primary-button class="ms-3">
-                                        {{ __('Access Now') }}
-                                    </x-primary-button></a>
+                                <div class="mt-4">
+                                    <a href="{{ $marketplace->platform->homepage }}" target="_blank" class="text-blue-500">Explore</a>
+                                    <a href="{{ route('user.marketplace.login', $marketplace->id) }}"
+                                        class="text-blue-500">
+                                        <x-primary-button class="ms-3">
+                                            {{ __('Access Now') }}
+                                        </x-primary-button>
+                                    </a>
+                                </div>
+                                <!-- Centered Horizontal Line -->
+                                <hr class="mx-auto my-4 w-1/2 border-t-2 border-gray-300">
+
+                                <!-- Additional Information Section -->
+                                <div class="flex flex-col space-y-2">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Last Login:</span>
+                                        <span
+                                            class="text-muted font-semibold text-gray-800">{{ $marketplace->platform_user_last_login }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Current Plan:</span>
+                                        <span
+                                            class="text-xl font-semibold text-gray-800">{{ $marketplace->listings_count }}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Status:</span>
+                                        <span
+                                            class="text-xl font-semibold text-green-600">{{ ucfirst($marketplace->platform_user_status) }}</span>
+                                            {{-- class="text-xl font-semibold text-gray-800">${{ number_format($marketplace->revenue, 2) }}</span> --}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @empty
                         <div class="col-span-full text-center text-gray-600">No marketplaces available.</div>
                     @endforelse
+
                 </div>
             </div>
         </div>

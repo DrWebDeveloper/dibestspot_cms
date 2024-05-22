@@ -17,7 +17,7 @@
                 <div class="grid grid-cols-1 gap-6 p-6 text-gray-900">
                     @forelse($platforms as $platform)
                         <div
-                            class="mb-4 overflow-hidden border-2 border-sky-900 bg-white shadow-md hover:bg-gray-500 sm:rounded-lg">
+                            class="mb-4 overflow-hidden border-2 border-sky-900 bg-white shadow-md hover:bg-gray-100 sm:rounded-lg">
                             <div class="flex items-center justify-between border-b border-gray-200 bg-white p-6">
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-800">{{ $platform->name }}</h2>
@@ -30,15 +30,50 @@
                                     <a href="{{ route('admin.platform.edit', $platform->id) }}" class="text-blue-500">
                                         <x-primary-button class="ms-3">{{ __('Edit') }}</x-primary-button>
                                     </a>
-                                    <a href="{{ route('admin.platform.destroy', $platform->id) }}" class="text-blue-500">
-                                        <x-danger-button class="ms-3">{{ __('Delete') }}</x-danger-button>
-                                    </a>
+                                    @if($platform->accounts->count())
+                                        <a href="#"
+                                            class="text-blue-500">
+                                            <x-danger-button class="ms-3" disabled>{{ __('Delete') }}</x-danger-button>
+                                        </a>
+                                        @else
+                                        <a href="{{ route('admin.platform.destroy', $platform->id) }}"
+                                            class="text-blue-500">
+                                            <x-danger-button class="ms-3">{{ __('Delete') }}</x-danger-button>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <!-- Centered Half-Line -->
+                            {{-- <div class="relative">
+                                <div
+                                    class="absolute left-1/2 mb-4 mt-4 w-1/2 -translate-x-1/2 transform border-t border-gray-300">
+                                </div>
+                            </div> --}}
+
+                            <!-- Statistics Section -->
+                            <div class="px-2 py-2">
+                                <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-2 md:grid-cols-3">
+                                    <div>
+                                        <p class="text-sm text-gray-500">No. of Users</p>
+                                        <p class="text-3xl font-bold text-gray-800">{{ $platform->accounts->count() }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">No. of Vendors</p>
+                                        <p class="text-3xl font-bold text-gray-800">{{ $platform->accounts->count() }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Active Now</p>
+                                        <p class="text-3xl font-bold text-gray-800">{{ $platform->accounts->count() }}</p>
+                                    </div>
+                                    <!-- Add more statistics as needed -->
                                 </div>
                             </div>
                         </div>
                     @empty
                         <div class="col-span-full text-center text-gray-600">No marketplaces available.</div>
                     @endforelse
+
 
                     <div class="col-span-full">
                         {{ $platforms->links() }}

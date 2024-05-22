@@ -62,7 +62,8 @@ class Platform extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
 
-    public function scopeInactive($query) {
+    public function scopeInactive($query)
+    {
         return $query->where('status', 'inactive');
     }
 
@@ -73,7 +74,8 @@ class Platform extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
 
-    public function scopeSuspended($query) {
+    public function scopeSuspended($query)
+    {
         return $query->where('status', 'suspended');
     }
 
@@ -84,7 +86,8 @@ class Platform extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
 
-    public function scopeLoginEnabled($query) {
+    public function scopeLoginEnabled($query)
+    {
         return $query->where('auto_login', 'enabled');
     }
 
@@ -95,8 +98,39 @@ class Platform extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
 
-    public function scopeAutoRegistertionEnabled($query) {
+    public function scopeAutoRegistertionEnabled($query)
+    {
         return $query->where('auto_register', 'enabled');
+    }
+
+    /**
+     * Scope a query to only include platforms where login is disabled.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+
+    public function scopeLoginDisabled($query)
+    {
+        return $query->where('auto_login', 'disabled');
+    }
+
+    /**
+     * Scope a query to only include platforms where register is disabled.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+
+    public function scopeAutoRegistertionDisabled($query)
+    {
+        return $query->where('auto_register', 'disabled');
+    }
+
+    // platform has many user accounts
+    public function accounts()
+    {
+        return $this->hasMany(UserPlatform::class);
     }
 
 }
