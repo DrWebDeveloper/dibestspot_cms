@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// Admin Routes
+// Admin Routes.
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/dashboard', [AdminContoller::class, 'dashboard'])->name('dashboard');
 
