@@ -214,12 +214,9 @@
                             <x-input-label for="package" :value="__('Default Package: ')" />
                             <select id="package" name="package"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option value="payment" selected>Payment</option>
-                                <option value="marketplace" selected>Marketplace</option>
-                                <option value="crowdfunding">Crowdfunding</option>
-                                <option value="e-commerce">E-commerce</option>
-                                <option value="social">Social</option>
-                                <option value="other">Other</option>
+                                <option value="free" selected>Free</option>
+                                <option value="basic" selected>Basic</option>
+                                <option value="premium">Premium</option>
                             </select>
                         </div>
 
