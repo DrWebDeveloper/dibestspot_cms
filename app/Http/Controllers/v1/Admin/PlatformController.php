@@ -26,7 +26,7 @@ class PlatformController extends Controller
     public function store(Request $request)
     {
         $request->merge([
-            'slug' => Str::slug($request->name),
+            'slug' => Str::slug($request->name).rand(100000, 999999),
 
         ]);
 
@@ -77,7 +77,7 @@ class PlatformController extends Controller
     {
         $platform = Platform::find($platform_id);
         $request->merge([
-            'slug' => Str::slug($request->name),
+            'slug' => Str::slug($request->name).'-'.rand(100000, 999999),
 
         ]);
         $validatedData = $request->validate([
