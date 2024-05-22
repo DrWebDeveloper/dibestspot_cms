@@ -50,8 +50,8 @@ class PlatformController extends Controller
             'environment' => 'required|in:staging,production,development',
             'type' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'status' => 'required|in:active,inactive,suspended,pending,maintenance',
         ]);
 
@@ -124,8 +124,8 @@ class PlatformController extends Controller
             'environment' => 'required|in:staging,production,development',
             'type' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'status' => 'required|in:active,inactive,suspended,pending,maintenance',
         ]);
 
