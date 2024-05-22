@@ -246,7 +246,6 @@
                             </select>
                         </div>
 
-
                         <div class="mb-3">
                             <x-input-label for="logo" :value="__('Logo: ')" class="w-1/4" />
                             <label for="logo"
