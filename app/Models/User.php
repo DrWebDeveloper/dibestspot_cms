@@ -72,6 +72,13 @@ class User extends Authenticatable
         return $this->hasMany(UserPlatform::class);
     }
 
+
+    public function packages(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(UserPackage::class);
+    }
+
+
     /**
      * Scope a query to only include non-admin users
      *
