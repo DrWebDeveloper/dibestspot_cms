@@ -13,6 +13,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                {{ $errors->any() ? $errors : '' }}
                 <form action="{{ route('admin.package.store') }}" method="POST" enctype="multipart/form-data">
                     <div class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                         @csrf
@@ -25,8 +26,8 @@
 
                         <div>
                             <x-input-label for="description" :value="__('Description: ')" />
-                            <x-textarea-input id="description" name="description" type="text" class="mt-1 block w-full"
-                                :value="old('description')" />
+                            <x-textarea-input id="description" name="description" type="text"
+                                class="mt-1 block w-full" required> {{ old('description') }}</x-textarea-input>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
 
@@ -42,7 +43,7 @@
                         <div>
                             <x-input-label for="price" :value="__('Price: ')" />
                             <x-text-input id="price" name="price" type="text" class="mt-1 block w-full"
-                                :value="old('price')" />
+                                :value="old('price')" required />
                             <x-input-error class="mt-2" :messages="$errors->get('price')" />
                         </div>
 
@@ -60,7 +61,7 @@
                         <div>
                             <x-input-label for="duration" :value="__('Duration: ')" />
                             <x-text-input id="duration" name="duration" type="text" class="mt-1 block w-full"
-                                :value="old('duration')" />
+                                :value="old('duration')" required />
                             <x-input-error class="mt-2" :messages="$errors->get('duration')" />
                         </div>
 
@@ -94,8 +95,6 @@
                         </div>
 
 
-
-
                         <div>
                             <x-input-label for="discount" :value="__('Discount: ')" />
                             <x-text-input id="discount" name="discount" type="text" class="mt-1 block w-full"
@@ -115,7 +114,7 @@
                         </div>
 
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <x-input-label for="type" :value="__('Type: ')" />
                             <select id="type" name="type"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
@@ -123,7 +122,7 @@
                             </select>
                         </div>
 
-                        {{-- <div class="mb-3">
+                        <div class="mb-3">
                             <x-input-label for="package" :value="__('Default Package: ')" />
                             <select id="package" name="package"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
@@ -131,7 +130,7 @@
                                 <option value="basic" selected>Basic</option>
                                 <option value="premium">Premium</option>
                             </select>
-                        </div> --}}
+                        </div>
 
                         <div class="mb-3">
                             <x-input-label for="category" :value="__('Category: ')" />
@@ -139,7 +138,7 @@
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="other" selected>Other</option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <x-input-label for="status" :value="__('Status: ')" />

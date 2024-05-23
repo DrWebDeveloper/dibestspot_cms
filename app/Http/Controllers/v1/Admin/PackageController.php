@@ -43,34 +43,41 @@ class PackageController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|alpha_dash|unique:packages,slug',
             'description' => 'required|string',
-            'url' => 'nullable|url',
             'price' => 'required|numeric',
             'currency' => 'required',
             'duration' => 'required|integer',
             'duration_unit' => 'required|string',
-            'trial' => 'required|integer',
-            'trial_unit' => 'required|string',
-            'discount' => 'required|integer',
-            'discount_unit' => 'required|string',
-            'type' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
             'status' => 'required|in:draft,published,archieved,deleted,limited',
         ]);
-
 
         try {
             DB::beginTransaction();
 
-            Package::create($validatedData);
-            DB::commit();
-            flash()->success('Package created successfully');
-            return redirect()->route('admin.package.index');
+            $package = new Package();
+            $package->name = $validatedData['name'];
+            $package->slug = $validatedData['slug'];
+            $package->description = $validatedData['description'];
+            $package->price = $validatedData['price'];
+            $package->currency = $validatedData['currency'] ?? 'USD';
+            $package->duration = $validatedData['duration'] ?? 1;
+            $package->duration_unit = $validatedData['duration_unit'] ?? 'month';
+            $package->trial = $validatedData['trial'] ?? 0;
+            $package->trial_unit = $validatedData['trial_unit'] ?? 'day';
+            $package->discount = $validatedData['discount']?? 0;
+            $package->discount_unit = $validatedData['discount_unit'] ?? 'percentage';
+            $package->type = $validatedData['type'] ?? 'subscription';
+            $package->category = $validatedData['category'] ?? 'other';
+            $package->status = $validatedData['status'];
+            if ($package->save()) {
+                DB::commit();
+                flash()->success('Package created successfully');
+                return redirect()->route('admin.package.index');
+            }
         } catch (\Throwable $th) {
             DB::rollBack();
-            flash()->error('Something went wrong');
+            flash()->error($th->getMessage());
             return redirect()->back()->withInput();
         }
-
     }
 
     /**
@@ -142,18 +149,17 @@ class PackageController extends Controller
             $package->status = $validatedData['status'];
             if ($package->update()) {
                 DB::commit();
-                    $package->update();
-                }
-
-                session()->flash('success', 'Package updated successfully.');
-                return redirect()->route('admin.package.index');
-            } catch (\Throwable $th) {
-                DB::rollBack();
-                session()->flash ('error', 'Package update failed.');
-                return redirect()->back();
+                $package->update();
             }
 
-}
+            session()->flash('success', 'Package updated successfully.');
+            return redirect()->route('admin.package.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            session()->flash('error', 'Package update failed.');
+            return redirect()->back();
+        }
+    }
 
 
 
@@ -161,18 +167,17 @@ class PackageController extends Controller
      * Remove the specified resource from storage.
      */
 
-     public function destroy($id)
-     {
-         $package = Package::findOrFail($id);
-         if ($package) {
-             $package->delete();
-             return redirect()->route('admin.package.index')->with([
-                 'message' => 'Package Deleted Successfully',
-                 'status' => 'success'
-             ]);
-         } else {
-             abort(404);
-         }
-     }
-
+    public function destroy($id)
+    {
+        $package = Package::findOrFail($id);
+        if ($package) {
+            $package->delete();
+            return redirect()->route('admin.package.index')->with([
+                'message' => 'Package Deleted Successfully',
+                'status' => 'success'
+            ]);
+        } else {
+            abort(404);
+        }
+    }
 }

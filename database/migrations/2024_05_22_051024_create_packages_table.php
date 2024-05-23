@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('currency')->default('USD');
             $table->unsignedInteger('duration')->default(1);
             $table->string('duration_unit')->default('month');
-            $table->unsignedInteger('trial')->default(7);
-            $table->string('trial_unit')->default('day');
-            $table->unsignedInteger('discount')->default(0);
-            $table->string('discount_unit')->default('percent');
+            $table->unsignedInteger('trial')->nullable();
+            $table->string('trial_unit')->nullable();
+            $table->unsignedInteger('discount')->nullable();
+            $table->enum('discount_unit', ['percentage', 'fixed'])->nullable();
             $table->string('type')->default('subscription');
             $table->string('category')->default('other');
             $table->enum('status', ['draft', 'published', 'archived', 'deleted', 'limited'])->default('draft');
