@@ -138,6 +138,7 @@ class PlatformController extends Controller
 
         try {
             DB::beginTransaction();
+            $platform->allowed_packages = json_encode($request->allowed_packages);
             $platform->name = $validatedData['name'];
             $platform->slug = $validatedData['slug'];
             $platform->description = $validatedData['description'];
@@ -161,6 +162,14 @@ class PlatformController extends Controller
             if ($platform->update()) {
                 DB::commit();
                 if ($request->hasFile('logo')) {
+                    // if the platform has a logo, delete the old one
+                    if ($platform->logo) {
+                        $oldLogo = public_path('storage/' . $platform->logo);
+                        if (file_exists($oldLogo)) {
+                            unlink($oldLogo);
+                        }
+                    }
+
                     // store the logo image
                     $logo = $request->file('logo');
                     $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
@@ -172,6 +181,14 @@ class PlatformController extends Controller
                     $platform->update();
                 }
                 if ($request->hasFile('photo')) {
+                    // if the platform has a photo, delete the old one
+                    if ($platform->photo) {
+                        $oldPhoto = public_path('storage/' . $platform->photo);
+                        if (file_exists($oldPhoto)) {
+                            unlink($oldPhoto);
+                        }
+                    }
+
                     // store the photo image
                     $photo = $request->file('photo');
                     $fileName = time() . '_' . randString() .".".$logo->getClientOriginalExtension();
