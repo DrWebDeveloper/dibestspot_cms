@@ -13,20 +13,19 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                {{ dump($errors) }}
                 <form action="{{ route('admin.package.store') }}" method="POST" enctype="multipart/form-data">
                     <div class="grid grid-cols-2 gap-6 p-6 text-gray-900 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                         @csrf
                         <div>
                             <x-input-label for="name" :value="__('Name:')" />
                             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
-                                :value="old('name')" require />
+                                :value="old('name')" required autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('name')" />
                         </div>
 
                         <div>
                             <x-input-label for="description" :value="__('Description: ')" />
-                            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"
+                            <x-textarea-input id="description" name="description" type="text" class="mt-1 block w-full"
                                 :value="old('description')" />
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
@@ -50,10 +49,10 @@
                         <div>
                             <x-input-label for="currency" :value="__('Currency')" />
                             <select id="currency" name="currency"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                            <option value="usd" selected>USD</option>
-                            <option value="pkr">PKR</option>
-                        </select>
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="usd" selected>USD</option>
+                                <option value="pkr">PKR</option>
+                            </select>
                             <x-input-error class="mt-2" :messages="$errors->get('currency')" />
                         </div>
 
@@ -68,18 +67,18 @@
                         <div>
                             <x-input-label for="duration_unit" :value="__('Duration Unit: ')" />
                             <select id="duration_unit" name="duration_unit"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                            <option value="day" selected>Day</option>
-                            <option value="month">Month</option>
-                        </select>
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="day" selected>Day</option>
+                                <option value="month">Month</option>
+                            </select>
                             <x-input-error class="mt-2" :messages="$errors->get('duration_unit')" />
                         </div>
 
 
                         <div>
                             <x-input-label for="trial" :value="__('Trial: ')" />
-                            <x-text-input id="trial" name="trial" type="text"
-                                class="mt-1 block w-full" :value="old('trial')" />
+                            <x-text-input id="trial" name="trial" type="text" class="mt-1 block w-full"
+                                :value="old('trial')" />
                             <x-input-error class="mt-2" :messages="$errors->get('trial')" />
                         </div>
 
@@ -87,10 +86,10 @@
                         <div>
                             <x-input-label for="trial_unit" :value="__('Trail Unit: ')" />
                             <select id="trial_unit" name="trial_unit"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                            <option value="day" selected>Day</option>
-                            <option value="month">Month</option>
-                        </select>
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="day" selected>Day</option>
+                                <option value="month">Month</option>
+                            </select>
                             <x-input-error class="mt-2" :messages="$errors->get('trial_unit')" />
                         </div>
 
@@ -105,9 +104,9 @@
                         </div>
 
 
-                         <div>
+                        <div>
                             <x-input-label for="discount_unit" :value="__('Discount Unit ')" />
-                                <select id="discount_unit" name="discount_unit"
+                            <select id="discount_unit" name="discount_unit"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="percentage" selected>Percentage</option>
                                 <option value="fixed">Fixed</option>
@@ -120,12 +119,7 @@
                             <x-input-label for="type" :value="__('Type: ')" />
                             <select id="type" name="type"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option value="payment" selected>Payment</option>
-                                <option value="marketplace" selected>Marketplace</option>
-                                <option value="crowdfunding">Crowdfunding</option>
-                                <option value="e-commerce">E-commerce</option>
-                                <option value="social">Social</option>
-                                <option value="other">Other</option>
+                                <option value="subscription" selected>Subscription</option>
                             </select>
                         </div>
 
@@ -143,13 +137,7 @@
                             <x-input-label for="category" :value="__('Category: ')" />
                             <select id="category" name="category"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option selected>Finance</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="education">Education</option>
-                                <option value="health">Health</option>
-                                <option value="news">News</option>
-                                <option value="social">Social</option>
-                                <option value="other">Other</option>
+                                <option value="other" selected>Other</option>
                             </select>
                         </div>
 
@@ -164,15 +152,16 @@
                                 <option value="limited">Limited</option>
                             </select>
                         </div>
+                    </div>
 
 
 
-                        <div class="mb-3 flex justify-between px-6">
-                            <a href="{{ route('admin.package.index') }}">
-                                <x-secondary-button>{{ __('Go Back') }}</x-secondary-button>
-                            </a>
-                            <x-primary-button type="submit">{{ __('Save') }}</x-primary-button>
-                        </div>
+                    <div class="mb-3 flex justify-between px-6">
+                        <a href="{{ route('admin.package.index') }}">
+                            <x-secondary-button>{{ __('Go Back') }}</x-secondary-button>
+                        </a>
+                        <x-primary-button type="submit">{{ __('Save') }}</x-primary-button>
+                    </div>
                 </form>
             </div>
         </div>
