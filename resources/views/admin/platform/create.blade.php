@@ -210,7 +210,7 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <x-input-label for="package" :value="__('Default Package: ')" />
                             <select id="package" name="package"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
@@ -218,7 +218,7 @@
                                 <option value="basic" selected>Basic</option>
                                 <option value="premium">Premium</option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <x-input-label for="category" :value="__('Category: ')" />
@@ -231,6 +231,18 @@
                                 <option value="news">News</option>
                                 <option value="social">Social</option>
                                 <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <x-input-label for="allowed_packages" :value="__('Allowed Packages: ')" />
+                            <select id="allowed_packages" name="allowed_packages[]" multiple
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @forelse ($allowed_packages as $package)
+                                    <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                @empty
+                                    <option value="[]">All Packages</option>
+                                @endforelse
                             </select>
                         </div>
 

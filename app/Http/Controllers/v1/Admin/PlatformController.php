@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\Models\Platform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,8 @@ class PlatformController extends Controller
 
     public function create()
     {
-        return view('admin.platform.create');
+        $allowed_packages = Package::where('status', 'published')->get(['name', 'id']);
+        return view('admin.platform.create',['allowed_packages' => $allowed_packages]);
     }
 
     public function index()
@@ -58,6 +60,8 @@ class PlatformController extends Controller
 
         $validatedData['uid'] = 'p-'.uniqid();
 
+        $validatedData['allowed_packages'] = json_encode($request->allowed_packages);
+
         if (Platform::create($validatedData)) {
             // store the logo image if it exists
             if ($request->hasFile('logo')) {
@@ -88,7 +92,8 @@ class PlatformController extends Controller
     public function edit($platform_id)
     {
         $platform = Platform::find($platform_id);
-        return view('admin.platform.edit', compact('platform'));
+        $allowed_packages = Package::where('status', 'published')->get(['name', 'id']);
+        return view('admin.platform.edit', compact('platform','allowed_packages'));
     }
 
     public function show($platform_id)

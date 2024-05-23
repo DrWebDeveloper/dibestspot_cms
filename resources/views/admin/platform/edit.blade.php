@@ -27,7 +27,8 @@
                         <div>
                             <x-input-label for="description" :value="__('Description: ')" />
                             <x-textarea-input id="description" name="description" type="text"
-                                class="mt-1 block w-full" required> {{ old('description', $platform->description) }}</x-textarea-input>
+                                class="mt-1 block w-full" required>
+                                {{ old('description', $platform->description) }}</x-textarea-input>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
 
@@ -224,6 +225,20 @@
                                 <option value="news" @selected($platform->category === 'news')>News</option>
                                 <option value="social" @selected($platform->category === 'social')>Social</option>
                                 <option value="other" @selected($platform->category === 'other')>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <x-input-label for="allowed_packages" :value="__('Allowed Packages: ')" />
+                            <select id="allowed_packages" name="allowed_packages[]" multiple
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @php
+                                    $currentPackages = json_decode($platform->allowed_packages);
+                                @endphp
+                                @foreach ($allowed_packages as $package)
+                                    <option value="{{ $package->id }}" @selected(in_array($package->id, $currentPackages))>
+                                        {{ $package->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 

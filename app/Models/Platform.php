@@ -15,6 +15,8 @@ class Platform extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'uid',
+        'allowed_packages',
         'name',
         'slug',
         'logo',
