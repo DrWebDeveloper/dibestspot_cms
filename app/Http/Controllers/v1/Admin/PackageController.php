@@ -34,7 +34,6 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->merge([
             'slug' => Str::slug($request->name) . '-' . rand(100000, 999999),
         ]);
@@ -108,56 +107,45 @@ class PackageController extends Controller
         $package = Package::find($package_id);
         $request->merge([
             'slug' => Str::slug($request->name) . '-' . rand(100000, 999999),
-
         ]);
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|alpha_dash|unique:packages,slug,' . $package_id, // Allow the current package's slug
+            'slug' => 'required|string|max:255|alpha_dash|unique:packages,slug',
             'description' => 'required|string',
-            'url' => 'nullable|url',
             'price' => 'required|numeric',
-            'currency' => 'required|string',
+            'currency' => 'required',
             'duration' => 'required|integer',
             'duration_unit' => 'required|string',
-            'trial' => 'required|integer',
-            'trial_unit' => 'required|string',
-            'discount' => 'required|integer',
-            'discount_unit' => 'required|string',
-            'type' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
             'status' => 'required|in:draft,published,archieved,deleted,limited',
         ]);
 
-
-
         try {
             DB::beginTransaction();
+
             $package->name = $validatedData['name'];
-            // $package->slug = $validatedData['slug'];
+            $package->slug = $validatedData['slug'];
             $package->description = $validatedData['description'];
-            // $package->url = $validatedData['url'];
             $package->price = $validatedData['price'];
-            $package->currency = $validatedData['currency'];
-            $package->duration = $validatedData['duration'];
-            $package->duration_unit = $validatedData['duration_unit'];
-            $package->trial = $validatedData['trial'];
-            $package->trial_unit = $validatedData['trial_unit'];
-            $package->discount = $validatedData['discount'];
-            $package->discount_unit = $validatedData['discount_unit'];
-            $package->type = $validatedData['type'];
-            $package->category = $validatedData['category'];
+            $package->currency = $validatedData['currency'] ?? 'USD';
+            $package->duration = $validatedData['duration'] ?? 1;
+            $package->duration_unit = $validatedData['duration_unit'] ?? 'month';
+            $package->trial = $validatedData['trial'] ?? 0;
+            $package->trial_unit = $validatedData['trial_unit'] ?? 'day';
+            $package->discount = $validatedData['discount']?? 0;
+            $package->discount_unit = $validatedData['discount_unit'] ?? 'percentage';
+            $package->type = $validatedData['type'] ?? 'subscription';
+            $package->category = $validatedData['category'] ?? 'other';
             $package->status = $validatedData['status'];
             if ($package->update()) {
                 DB::commit();
-                $package->update();
+                flash()->success('Package updated successfully');
+                return redirect()->route('admin.package.index');
             }
-
-            session()->flash('success', 'Package updated successfully.');
-            return redirect()->route('admin.package.index');
         } catch (\Throwable $th) {
             DB::rollBack();
-            session()->flash('error', 'Package update failed.');
-            return redirect()->back();
+            flash()->error($th->getMessage());
+            return redirect()->back()->withInput();
         }
     }
 

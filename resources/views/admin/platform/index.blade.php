@@ -42,7 +42,7 @@
                                         </a>
                                     @endif --}}
 
-                                    <form action="{{ route('platform.destroy', $platform->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Platform?')">
+                                    <form action="{{ route('admin.platform.destroy', $platform->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Platform?')">
                                         @csrf
                                         @method('DELETE')
                                             <x-danger-button class="ms-3">{{ __('Delete') }}</x-danger-button>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="col-span-full text-center text-gray-600">No marketplaces available.</div>
+                        <div class="col-span-full text-center text-gray-600">No platforms available.</div>
                     @endforelse
 
 

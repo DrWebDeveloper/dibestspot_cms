@@ -63,7 +63,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin']
         Route::get('/{platform_id}/edit', [PlatformController::class, 'edit'])->name('edit');
         Route::post('/{platform_id}/update', [PlatformController::class, 'update'])->name('update');
         // Route::delete('/{platform_id}', [PlatformController::class, 'destroy'])->name('destroy');
-        Route::delete('/{platform_id}/delete', [PlatformController::class, 'destroy'])->name('platform.destroy');
+        Route::delete('/{platform_id}/delete', [PlatformController::class, 'destroy'])->name('destroy');
 
     });
 
@@ -74,7 +74,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin']
     Route::get('/{package_id}/show', [PackageController::class, 'show'])->name('show');
     Route::get('/{package_id}/edit', [PackageController::class, 'edit'])->name('edit');
     Route::post('/{package_id}/update', [PackageController::class, 'update'])->name('update');
-    Route::delete('/{package_id}/delete', [PackageController::class, 'destroy'])->name('package.destroy');
+    Route::delete('/{package_id}/delete', [PackageController::class, 'destroy'])->name('destroy');
 });
 
 });
