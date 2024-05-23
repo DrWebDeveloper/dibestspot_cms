@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('platforms', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique()->nullable();
+            $table->string('allowed_packages')->nullable();
             $table->string('name');
+            $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->string('url')->nullable();
