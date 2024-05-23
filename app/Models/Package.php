@@ -49,4 +49,6 @@ class Package extends Model
     {
         return $this->hasMany(UserPackage::class);
     }
+
+
 }

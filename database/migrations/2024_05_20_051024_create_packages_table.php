@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('category')->default('other');
             $table->enum('status', ['draft', 'published', 'archived', 'deleted', 'limited'])->default('draft');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

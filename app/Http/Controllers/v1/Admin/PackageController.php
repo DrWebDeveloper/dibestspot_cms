@@ -160,14 +160,16 @@ class PackageController extends Controller
     public function destroy($id)
     {
         $package = Package::findOrFail($id);
-        if ($package) {
-            $package->delete();
-            return redirect()->route('admin.package.index')->with([
-                'message' => 'Package Deleted Successfully',
-                'status' => 'success'
-            ]);
-        } else {
-            abort(404);
+        // check if the package has any user account who are active
+        if ($package->accounts()->where('status', 'active')->count() > 0) {
+            flash()->error('Package has active users, cannot delete');
+            return redirect()->back();
+        }
+
+
+        if ($package->delete()) {
+            flash()->info('Package deleted successfully');
+            return redirect()->route('admin.package.index');
         }
     }
 }

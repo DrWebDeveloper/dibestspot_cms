@@ -30,6 +30,7 @@ return new class extends Migration
             $table->timestamp('expired_at')->nullable();
             $table->enum('status', ['trial', 'active', 'canceled', 'paused', 'resumed', 'failed', 'refunded', 'renewed', 'renewed_failed', 'expired', ])->default('active');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -222,14 +222,31 @@ class PlatformController extends Controller
     public function destroy($id)
     {
         $platform = Platform::findOrFail($id);
-        if ($platform) {
-            $platform->delete();
-            return redirect()->route('admin.platform.index')->with([
-                'message' => 'Platform Deleted Successfully',
-                'status' => 'success'
-            ]);
-        } else {
-            abort(404);
+        // check if the platform has any users
+        if ($platform->users->count() > 0) {
+            session()->flash('error', 'Platform has users. Cannot delete.');
+            return redirect()->back();
         }
+
+        // delete the platform logo and photo
+        if ($platform->logo) {
+            $logo = public_path('storage/' . $platform->logo);
+            if (file_exists($logo)) {
+                unlink($logo);
+            }
+        }
+        if ($platform->photo) {
+            $photo = public_path('storage/' . $platform->photo);
+            if (file_exists($photo)) {
+                unlink($photo);
+            }
+        }
+
+        // delete the platform
+        if ($platform->delete()) {
+            flash()->info('Platform deleted successfully');
+            return redirect()->route('admin.platform.index');
+        }
+
     }
 }

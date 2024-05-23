@@ -47,6 +47,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->enum('status', ['active', 'inactive', 'suspended', 'pending', 'maintenance', ])->default('pending');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
