@@ -32,11 +32,14 @@ if (!function_exists('decryptData')) {
 
 // Function to generate a random string
 if (!function_exists('randString')) {
-    function randString($length = 10)
+    function randString($length = 10, $uppercase = true, $lowercase = true, $numbers = true)
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '';
+        $characters .= $uppercase ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '';
+        $characters .= $lowercase ? 'abcdefghijklmnopqrstuvwxyz' : '';
+        $characters .= $numbers ? '0123456789' : '';
         $charactersLength = strlen($characters);
-        $randomString = auth()->check() ? auth()->user()->id . '_' : '';
+        $randomString = '';
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }

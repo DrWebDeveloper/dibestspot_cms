@@ -20,7 +20,8 @@ class PlatformController extends Controller
     public function index()
     {
         $platforms = Platform::paginate(10);
-        return view('admin.platform.index', compact('platforms'));
+        $platforms_count = Platform::count();
+        return view('admin.platform.index', compact('platforms','platforms_count'));
     }
 
     public function store(Request $request)
@@ -54,6 +55,8 @@ class PlatformController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'status' => 'required|in:active,inactive,suspended,pending,maintenance',
         ]);
+
+        $validatedData['uid'] = 'p-'.uniqid();
 
         if (Platform::create($validatedData)) {
             // store the logo image if it exists

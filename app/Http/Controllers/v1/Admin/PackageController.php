@@ -17,8 +17,9 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::paginate(10);
-        return view('admin.package.index', compact('packages'));
+        $packages = Package::paginate(12);
+        $packages_count = Package::count();
+        return view('admin.package.index', compact('packages', 'packages_count'));
     }
 
     /**
@@ -53,6 +54,7 @@ class PackageController extends Controller
             DB::beginTransaction();
 
             $package = new Package();
+            $package->uid = 'p-' . uniqid();
             $package->name = $validatedData['name'];
             $package->slug = $validatedData['slug'];
             $package->description = $validatedData['description'];
@@ -62,7 +64,7 @@ class PackageController extends Controller
             $package->duration_unit = $validatedData['duration_unit'] ?? 'month';
             $package->trial = $validatedData['trial'] ?? 0;
             $package->trial_unit = $validatedData['trial_unit'] ?? 'day';
-            $package->discount = $validatedData['discount']?? 0;
+            $package->discount = $validatedData['discount'] ?? 0;
             $package->discount_unit = $validatedData['discount_unit'] ?? 'percentage';
             $package->type = $validatedData['type'] ?? 'subscription';
             $package->category = $validatedData['category'] ?? 'other';
@@ -132,7 +134,7 @@ class PackageController extends Controller
             $package->duration_unit = $validatedData['duration_unit'] ?? 'month';
             $package->trial = $validatedData['trial'] ?? 0;
             $package->trial_unit = $validatedData['trial_unit'] ?? 'day';
-            $package->discount = $validatedData['discount']?? 0;
+            $package->discount = $validatedData['discount'] ?? 0;
             $package->discount_unit = $validatedData['discount_unit'] ?? 'percentage';
             $package->type = $validatedData['type'] ?? 'subscription';
             $package->category = $validatedData['category'] ?? 'other';

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Packages') }} ({{ $packages->count() }})
+                {{ __('Packages') }} ({{ $packages_count }})
             </h2>
             <a href="{{ route('admin.package.create') }}" class="text-blue-500">
                 <x-primary-button>{{ __('Add New') }}</x-primary-button>
@@ -19,7 +19,7 @@
                         <div class="mb-4 overflow-hidden border-2 border-sky-900 bg-white shadow-md hover:bg-gray-100 sm:rounded-lg">
                             <div class="flex flex-col p-6 w-full">
                                 <h2 class="text-2xl font-bold text-gray-800">{{ $package->name }}</h2>
-                                <p class="text-gray-600">{{ Str::limit($package->description, 50) }}</p>
+                                <p class="text-gray-600">{{ Str::limit($package->description, 25) }}</p>
                             </div>
 
                             {{-- Statistics --}}
@@ -43,9 +43,9 @@
                             </div>
 
                             {{-- Actions --}}
-                            <div class="flex items-center justify-center p-6">
+                            <div class="flex items-center justify-center py-6">
                                 <a href="{{ route('admin.package.show', $package->id) }}" class="text-blue-500">
-                                    <x-secondary-button class="ms-3">{{ __('View') }}</x-secondary-button>
+                                    <x-success-button class="ms-3">{{ __('View') }}</x-success-button>
                                 </a>
                                 <a href="{{ route('admin.package.edit', $package->id) }}" class="text-blue-500">
                                     <x-primary-button class="ms-3">{{ __('Edit') }}</x-primary-button>

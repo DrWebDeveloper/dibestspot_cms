@@ -18,6 +18,7 @@ class AdminUserSeeder extends Seeder
         User::create([
             'first_name' => 'Admin',
             'last_name' => 'DiBestSpot',
+            'uid' => 'admin',
             'username' => 'admin',
             'email' => 'admin@dibestspot.com',
             'phone_number' => '00923174499144',

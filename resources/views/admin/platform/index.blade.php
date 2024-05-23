@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Platforms') }} ({{ $platforms->count() }})
+                {{ __('Platforms') }} ({{ $platforms_count }})
             </h2>
             <a href="{{ route('admin.platform.create') }}" class="text-blue-500">
                 <x-primary-button>{{ __('Add New') }}</x-primary-button>
@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <a href="{{ route('admin.platform.show', $platform->id) }}" class="text-blue-500">
-                                        <x-secondary-button class="ms-3">{{ __('View') }}</x-secondary-button>
+                                        <x-success-button class="ms-3">{{ __('View') }}</x-success-button>
                                     </a>
                                     <a href="{{ route('admin.platform.edit', $platform->id) }}" class="text-blue-500">
                                         <x-primary-button class="ms-3">{{ __('Edit') }}</x-primary-button>

@@ -18,6 +18,7 @@ class PlatformFactory extends Factory
     public function definition(): array
     {
         return [
+            'uid' => 'p-' . uniqid(),
             'name' => $this->faker->company,
             'description' => $this->faker->paragraph,
             'slug' => $this->faker->unique()->slug,
