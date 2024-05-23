@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\UserRegistered;
 use App\Jobs\PlatformRegistration;
 use App\Models\Platform;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -25,7 +26,7 @@ class RegisterUserOnPlatforms implements ShouldQueue
     public function handle(UserRegistered $event): void
     {
         $user = $event->user;
-        Log::info("User {$user->id} registered. Registering user on platforms...");
+
         try {
             // Get the platform IDs where the user has to be registered
             $platformsToRegister = Platform::active()->autoRegistertionEnabled()
@@ -37,6 +38,9 @@ class RegisterUserOnPlatforms implements ShouldQueue
                 $platformsToRegister->each(function ($platform) use ($user) {
                     PlatformRegistration::dispatch($user, $platform);
                 });
+                // update user status to registered
+                Log::info("User {$user->id} has been registered on all platforms.");
+                User::where('id', $user->id)->update(['status' => 'registered']);
             } else {
                 // Log that the user is already registered on all platforms
                 Log::info("User {$user->id} is already registered on all platforms or there are no active platforms for auto registration.");

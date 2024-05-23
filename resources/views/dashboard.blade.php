@@ -49,7 +49,41 @@
                             </div>
                         </div>
                     @empty
-                        <div class="col-span-full text-center text-gray-600">No marketplaces available.</div>
+                        @if (auth()->user()->status === 'active')
+                            <div class="text-center">
+                                <p class="text-gray-600">You have not connected any marketplace yet.</p>
+                                <a href="{{ route('user.marketplaces') }}" class="text-blue-500">Connect Now</a>
+                            </div>
+                        @elseif(auth()->user()->status === 'pending')
+                            <div class="text-center">
+                                <p class="text-gray-600">Your account is pending approval.</p>
+                            </div>
+                        @elseif(auth()->user()->status === 'suspended')
+                            <div class="text-center">
+                                <p class="text-gray-600">Your account has been suspended.</p>
+                            </div>
+                        @elseif(auth()->user()->status === 'inactive')
+                            <div class="text-center">
+                                <p class="text-gray-600">Your account is inactive.</p>
+                            </div>
+                        @elseif(auth()->user()->status === 'rejected')
+                            <div class="text-center">
+                                <p class="text-gray-600">Your account has been rejected.</p>
+                            </div>
+                        @elseif(auth()->user()->status === 'blocked')
+                            <div class="text-center">
+                                <p class="text-gray-600">Your account has been blocked.</p>
+                            </div>
+                        @elseif(auth()->user()->status === 'deleted')
+                            <div class="text-center">
+                                <p class="text-gray-600">Your account has been deleted.</p>
+                            </div>
+                        @elseif(auth()->user()->status === 'propagating')
+                            <div class="text-center">
+                                <p class="text-gray-600">Your account is under propagation, please wait a few minutes.</p>
+                                <a href="{{ route('dashboard') }}"><x-primary-button class="ms-3">{{ __('Refresh') }}</x-primary-button></a>
+                            </div>
+                        @endif
                     @endforelse
 
                 </div>

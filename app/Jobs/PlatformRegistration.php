@@ -46,9 +46,7 @@ class PlatformRegistration implements ShouldQueue
                 'status' => 'active'
             ]);
 
-            if ($userPlatform) {
-                Log::info("User {$this->user->id} registered on platform {$this->platform->name} ({$this->platform->id}).");
-            } else {
+            if (!$userPlatform) {
                 Log::error("Error registering user {$this->user->id} on platform {$this->platform->name} ({$this->platform->id}).");
                 throw new \Exception("Error registering user {$this->user->id} on platform {$this->platform->name} ({$this->platform->id}).");
             }
